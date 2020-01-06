@@ -83,18 +83,20 @@ Widget threeButtonsSection = new Container(
         },
       ),
 
-      FlatButton.icon(
-        color: Colors.blue,
-        icon: Icon(Icons.accessibility_new), //`Icon` to display
-        label: Text('Famille'), //`Text` to display
-        onPressed: () {
+       MyStatefulWidget(),
 
-
-
-          //Code to execute when Floating Action Button is clicked
-          //...
-        },
-      ),
+//      FlatButton.icon(
+//        color: Colors.blue,
+//        icon: Icon(Icons.accessibility_new), //`Icon` to display
+//        label: Text('Famille'), //`Text` to display
+//        onPressed: () {
+//
+//
+//
+//          //Code to execute when Floating Action Button is clicked
+//          //...
+//        },
+//      ),
 
       FlatButton.icon(
         color: Colors.blue,
@@ -108,6 +110,41 @@ Widget threeButtonsSection = new Container(
     ],
   ),
 );
+
+class MyStatefulWidget extends StatefulWidget {
+  MyStatefulWidget({Key key}) : super(key: key);
+
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  String dropdownValue = 'Molinet';
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+
+      icon: Icon(Icons.accessibility_new),
+      value: dropdownValue,
+      style: TextStyle(color: Colors.black),
+
+
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue = newValue;
+        });
+      },
+      items: <String>['Molinet', 'Bozon', 'Laurencin', 'Plaideau']
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
+}
 
 
 
