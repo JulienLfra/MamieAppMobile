@@ -1,31 +1,34 @@
 {
   "users": [
-  {
-  "user_id": 1,
-  "user_name": "Molinet",
-  "user_surname": "Benjamin",
-  "user_initials": "BM"
-  },
     {
-"user_id": 2,
-"user_name": "Molinet",
-"user_surname": "Benoit",
-"user_initials": "BM"
-},{
-"user_id": 3,
-"user_name": "Molinet",
-"user_surname": "Charlotte",
-"user_initials": "CM"
-},{
-"user_id": 4,
-"user_name": "Plaideau",
-"user_surname": "Guillaume",
-"user_initials": "GP"
-},{
-"user_id": 5,
-"user_name": "Mary",
-"user_surname": "Anne",
-"user_initials": "AM"
-}
-]
+      "user_id": 1,
+      "user_name": "Molinet",
+      "user_surname": "Benjamin",
+      "user_initials": "BM"
+    },
+    {
+      "user_id": 2,
+      "user_name": "Molinet",
+      "user_surname": "Benoit",
+      "user_initials": "BM"
+    },
+    {
+      "user_id": 3,
+      "user_name": "Molinet",
+      "user_surname": "Charlotte",
+      "user_initials": "CM"
+    },
+    {
+      "user_id": 4,
+      "user_name": "Plaideau",
+      "user_surname": "Guillaume",
+      "user_initials": "GP"
+    },
+    {
+      "user_id": 5,
+      "user_name": "Mary",
+      "user_surname": "Anne",
+      "user_initials": "AM"
+    }
+  ]
 }

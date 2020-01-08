@@ -30,22 +30,25 @@ class HomePage extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
 
-                    Expanded(
-                        child: listContact()
-
-                    ),
-
                     Container(
-                      color: Colors.yellow,
-                      width: 300,
+                        child: listContact(),
+                      width: 140,
 
                     ),
 
+                    Expanded(
+                      //color: Colors.yellow,
+                      child: Container(
+                        child: new ListTile(
+                          title: new Text(' Google map'),
+                        ),
+                        color: Colors.yellow,
+                        height: 500,
 
+                      ),
+                    ),
                   ],
-
                 ),
-
               ),
               Container(
 
