@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mamie/Message.dart';
 import 'package:mamie/listContact.dart';
+import 'package:mamie/Settings.dart';
 
 
 
 
 class HomePage extends StatelessWidget {
+
+
+
   final topBar = new AppBar(
 
     backgroundColor: new Color(0xfff8faf8),
@@ -24,7 +29,42 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
 
-              topThreeButtonsSection ,
+              Container(
+                  child:  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      //build in a separated function1A
+                      FlatButton.icon(
+                        color: Colors.blue,
+                        icon: Icon(Icons.settings), //`Icon` to display
+                        label: Text('Settings'), //`Text` to display
+                        onPressed: () {
+                          navigateToSettingPage(context);
+                          //Code to execute when Floating Action Button is clicked
+                          //...
+                        },
+                      ),
+
+                      FamillyList(),
+
+
+                      FlatButton.icon(
+                        color: Colors.blue,
+                        icon: Icon(Icons.message),
+                        label: Text('Message'),
+                        onPressed: ()
+                        {
+                          navigateToMessagePage(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+
+
+
+
+              //topThreeButtonsSection ,
 
               Expanded(
                 child: Row(
@@ -89,43 +129,20 @@ class HomePage extends StatelessWidget {
 
 
     );
+
+  }
+
+  Future navigateToSettingPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
+
+  }
+  Future navigateToMessagePage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Message()));
   }
 }
 
 
 
-// Container with buttons setting, message and familly
-Widget topThreeButtonsSection = new Container(
-  child:  Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: <Widget>[
-      //build in a separated function1A
-      FlatButton.icon(
-        color: Colors.blue,
-        icon: Icon(Icons.settings), //`Icon` to display
-        label: Text('Settings'), //`Text` to display
-        onPressed: () {
-          //Code to execute when Floating Action Button is clicked
-          //...
-        },
-      ),
-
-      FamillyList(),
-
-
-      FlatButton.icon(
-        color: Colors.blue,
-        icon: Icon(Icons.message),
-        label: Text('Message'),
-        onPressed: () {
-
-        },
-      ),
-    ],
-  ),
-
-
-);
 
 
 // to add the list of familly that the user can choose
@@ -163,6 +180,7 @@ class FamillyListState extends State<FamillyList> {
     );
   }
 }
+
 
 
 
