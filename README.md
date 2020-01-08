@@ -1,4 +1,4 @@
-# mamie
+# mamieapp
 
 A new Flutter application.
 

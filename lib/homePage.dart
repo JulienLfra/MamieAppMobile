@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:mamie/Message.dart';
-import 'package:mamie/listContact.dart';
-import 'package:mamie/Settings.dart';
+import 'package:mamieapp/Message.dart';
+import 'package:mamieapp/listContact.dart';
+import 'package:mamieapp/Settings.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 
 
 class HomePage extends StatelessWidget {
 
+  GoogleMapController mapController;
 
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
 
   final topBar = new AppBar(
 
     backgroundColor: new Color(0xfff8faf8),
     centerTitle: true,
     elevation: 1.0,
-    title: Text('Mamie'),
+    title: Text('Mamiee'),
 
   );
 
@@ -79,12 +86,19 @@ class HomePage extends StatelessWidget {
                     Expanded(
                       //color: Colors.yellow,
                       child: Container(
-                        child: new ListTile(
-                          title: new Text(' Google map'),
-                        ),
-                        color: Colors.yellow,
-                        height: 500,
+                        child: GoogleMap(
+                          onMapCreated: _onMapCreated,
+                          initialCameraPosition: CameraPosition(
+                            target: _center,
+                            zoom: 11.0,
+                          ),
+//                        child: new ListTile(
+//                          title: new Text(' Google map'),
+//                        ),
+//                        color: Colors.yellow,
+//                        height: 500,
 
+                        ),
                       ),
                     ),
                   ],

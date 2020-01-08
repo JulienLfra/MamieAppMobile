@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mamie/homePage.dart';
+import 'package:mamieapp/homePage.dart';
 
 void main() => runApp(new MyApp());
 
@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Mamie',
+      title: 'Mamiee',
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
           primarySwatch: Colors.blue,
