@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mamie/listContact.dart';
+
+
 
 
 class HomePage extends StatelessWidget {
@@ -21,14 +24,14 @@ class HomePage extends StatelessWidget {
           child: Column(
             children: <Widget>[
 
-              threeButtonsSection ,
+              topThreeButtonsSection ,
+
               Expanded(
                 child: Row(
                   children: <Widget>[
 
                     Expanded(
-                        child: BodyLayout()
-
+                        child: listContact()
 
                     ),
 
@@ -43,9 +46,35 @@ class HomePage extends StatelessWidget {
 
                 ),
 
-
-
               ),
+              Container(
+
+                child: Card(
+
+
+                  child: Column(
+                    //mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const ListTile(
+                        leading: Text('image'),
+                        title: Text('Julien Laurencin'),
+                        subtitle: Text('Lyon.'),
+                      ),
+                      ButtonBar(
+                        children: <Widget>[
+                          FlatButton(
+                            child: const Text('see more'),
+                            onPressed: () { print('See more details for the user'); },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              color: Colors.blue,
+              height: 150,
+              ),
+
              // Expanded(child: BodyLayout()),
 
 
@@ -56,37 +85,14 @@ class HomePage extends StatelessWidget {
         //threeButtonsSection,
 
 
-
-
-//        new ListView(
-//
-//        children: <Widget>[
-//
-//          //You can add more widget bellow
-//
-//          threeButtonsSection ,
-//
-//
-//          BodyLayout(),
-//
-//
-//
-//
-//
-//
-//        ],
-//        shrinkWrap: true,
-
-//      )
-//
     );
   }
 }
 
 
 
-
-Widget threeButtonsSection = new Container(
+// Container with buttons setting, message and familly
+Widget topThreeButtonsSection = new Container(
   child:  Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround,
     children: <Widget>[
@@ -106,20 +112,20 @@ Widget threeButtonsSection = new Container(
 
       FlatButton.icon(
         color: Colors.blue,
-        icon: Icon(Icons.message), //`Icon` to display
-        label: Text('Message'), //`Text` to display
+        icon: Icon(Icons.message),
+        label: Text('Message'),
         onPressed: () {
-          //Code to execute when Floating Action Button is clicked
-          //...
+
         },
       ),
     ],
   ),
 
 
-
 );
 
+
+// to add the list of familly that the user can choose
 class FamillyList extends StatefulWidget {
   FamillyList({Key key}) : super(key: key);
 
@@ -155,43 +161,5 @@ class FamillyListState extends State<FamillyList> {
   }
 }
 
-class BodyLayout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return _myListView(context);
-  }
-}
 
-// replace this function with the code in the examples
-Widget _myListView(BuildContext context) {
 
-  final titles = ['bike', 'boat', 'bus', 'car',
-    'railway', 'run', 'subway', 'transit', 'walk', 'boat', 'bus', 'car',
-    'railway', 'run', 'subway', 'transit', 'walk'];
-
-  final icons = [Icons.directions_bike, Icons.directions_boat,
-    Icons.directions_bus, Icons.directions_car, Icons.directions_railway,
-    Icons.directions_run, Icons.directions_subway, Icons.directions_transit,
-    Icons.directions_walk];
-
-  return ListView.builder(
-    itemCount: titles.length,
-    itemBuilder: (context, index) {
-      return Card( //                           <-- Card widget
-          child: InkWell(
-            onTap: () {
-              print('tapped');
-            },
-            child: ListTile(
-
-            //leading: Icon(icons[index]),
-              title: Text(titles[index]),
-            ),
-         )
-      );
-    },
-    scrollDirection: Axis.vertical,
-    shrinkWrap: true,
-  );
-
-}
