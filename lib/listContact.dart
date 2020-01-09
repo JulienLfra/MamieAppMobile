@@ -29,10 +29,18 @@ Widget _myListView(BuildContext context) {
     itemBuilder: (context, index) {
 
       return Stack(
+
+
         children: <Widget>[
           Card(
+
+
             //                           <-- Card widget
               child: InkWell(
+
+
+
+
                 onTap: () {
                   DisplayContactCard();
 
@@ -43,28 +51,30 @@ Widget _myListView(BuildContext context) {
 
 
 
+
                   title: Text(user['users'][index]['user_name'], textAlign: TextAlign.right),
                   subtitle: Text(user['users'][index]['user_firstname'], textAlign: TextAlign.right),
                 ),
               )
           ),
-      Positioned(
-        left: 3,
-        top: .0,
-        bottom: .0,
-        child: Center(
-          child: CircleAvatar(
-            radius: 20.0,
+        Positioned(
+          left: 3,
+          top: .0,
+          bottom: .0,
+          child: Center(
+            child: CircleAvatar(
+              radius: 20.0,
 
-            backgroundImage: NetworkImage(user['users'][index]['user_thumbnail']),
+              backgroundImage: NetworkImage(user['users'][index]['user_thumbnail']),
+            ),
           ),
-        ),
-      )
-      ],);
+        )
+      ],
+      );
 
     },
-    scrollDirection: Axis.vertical,
-    shrinkWrap: true,
+    //scrollDirection: Axis.vertical,
+    //shrinkWrap: true,
   );
 
 }
