@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mamieapp/Message.dart';
-import 'package:mamieapp/listContact.dart';
+import 'package:mamieapp/listMembre.dart';
 import 'package:mamieapp/Settings.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
 
                     Container(
-                        child: listContact(),
+                        child: ListMembre(),
                       width: 140,
 
 
@@ -149,7 +149,6 @@ class HomePage extends StatelessWidget {
 
   Future navigateToSettingPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Settings()));
-
   }
   Future navigateToMessagePage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => Message()));
