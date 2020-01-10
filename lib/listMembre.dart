@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:mamieapp/redux/actions.dart';
 
 import 'dart:convert';
 
+import 'HomeState.dart';
 import 'models/user.dart';
 
 
@@ -36,21 +39,48 @@ Widget _myListView(BuildContext context) {
   */
 
 
-  return FractionallySizedBox(
-    widthFactor: 0.33,
-    heightFactor: 0.8,
-    child: Container(
-      // Debug
-      color: Colors.red,
-      child: ListView.builder(
-        itemCount: user['users'].length,
-        itemBuilder: (context, index) {
-          return Stack(
-            children: <Widget>[
-              Card(
-                child: InkWell(
+  return
+         FractionallySizedBox(
+          widthFactor: 0.33,
+          heightFactor: 0.8,
+          child: Container(
+            // Debug
+            // color: Colors.red,
+            child: ListView.builder(
+              itemCount: user['users'].length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  children: <Widget>[
+                    Card(
+                      // Todo ca marche presque ca
+                      child: StoreConnector<HomeState, VoidCallback>(
+                        converter: (store) {
+                          // Return a `VoidCallback`, which is a fancy name for a function
+                          // with no parameters. It only dispatches an Increment action.
+                          //return () => store.dispatch(ActionsTest.Increment);
+                          return () => store.dispatch(Taped(new User(user['users'][index]['user_name'], user['users'][index]['user_firstname'], user['users'][index]['user_thumbnail'])));
+                        },
+                        builder: (context, callback) {
+                          return new InkWell(
+                            onTap: callback,
+                            child: ListTile(
+                              title: Text(user['users'][index]['user_name'], textAlign: TextAlign.right),
+                              subtitle: Text(user['users'][index]['user_firstname'], textAlign: TextAlign.right),
+                              leading: CircleAvatar(
+                                radius: 15.0,
+                                backgroundImage: NetworkImage(user['users'][index]['user_thumbnail']),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+
+                      //child: InkWell(
+                      /*child: InkWell(
                   onTap: () {
-                    DisplayContactCard();
+
+                    // Todo change this to object en mieux
+                    DisplayContactCard(context, new User(user['users'][index]['user_name'],user['users'][index]['user_firstname'],user['users'][index]['user_thumbnail']));
                   },
                   child: ListTile(
                     title: Text(user['users'][index]['user_name'], textAlign: TextAlign.right),
@@ -61,30 +91,29 @@ Widget _myListView(BuildContext context) {
                     ),
                   ),
                 )
-              ),
-              /*Positioned(
-                left: 3,
-                top: .0,
-                bottom: .0,
-                child: Center(
-                  child: CircleAvatar(
-                    radius: 20.0,
+              ),*/
 
-                    backgroundImage: NetworkImage(user['users'][index]['user_thumbnail']),
-                  ),
-                ),
-              )*/
-            ],
-          );
-        },
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-      ),
-    ),
-  );
+
+
+
+
+
+                    )],
+
+
+
+                );
+              },
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+            ),
+          ),
+        );
+
 }
 
-DisplayContactCard(){
+DisplayContactCard(context, user){
   print('tapped');
-
 }
+
+typedef OnSaveCallback = void Function();

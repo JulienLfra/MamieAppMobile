@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:mamieapp/home.dart';
+import 'package:mamieapp/redux/homeReducer.dart';
 
-void main() => runApp(new MyApp());
+import 'package:redux/redux.dart';
+
+import 'HomeState.dart';
+import 'models/user.dart';
+
+//void main() => runApp(new MyApp());
+void main() {
+  final _initialState = HomeState(new User("testinit", "testinit", "testinit"));
+  final Store<HomeState> _store = Store<HomeState>(counterReducer, initialState: _initialState);
+  runApp(MyApp(store: _store));
+}
 
 class MyApp extends StatelessWidget {
+
+  // Redux
+  final Store<HomeState> store;
+  MyApp({this.store});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mamie App',
-      home: new Home(),
+    return StoreProvider(
+      store: store,
+      child: MaterialApp(
+        title: 'Mamie App',
+        home: new Home(),
+      )
     );
   }
 }
