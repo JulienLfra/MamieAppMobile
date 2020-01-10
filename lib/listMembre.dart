@@ -39,43 +39,44 @@ Widget _myListView(BuildContext context) {
   */
 
 
-  return FractionallySizedBox(
-    widthFactor: 0.33,
-    heightFactor: 0.8,
-    child: Container(
-      // Debug
-      color: Colors.red,
-      child: ListView.builder(
-        itemCount: user['users'].length,
-        itemBuilder: (context, index) {
-          return Stack(
-            children: <Widget>[
-              Card(
-              // Todo ca marche presque ca
-              child: StoreConnector<HomeState, VoidCallback>(
-                converter: (store) {
-                  // Return a `VoidCallback`, which is a fancy name for a function
-                  // with no parameters. It only dispatches an Increment action.
-                  return () => store.dispatch(ActionsTest.Increment);
-                  //return () => store.dispatch(Taped(user['users'][index]));
-                },
-                builder: (context, callback) {
-                  return new InkWell(
-                    onTap: callback,
-                    child: ListTile(
-                      title: Text(user['users'][index]['user_name'], textAlign: TextAlign.right),
-                      subtitle: Text(user['users'][index]['user_firstname'], textAlign: TextAlign.right),
-                      leading: CircleAvatar(
-                        radius: 15.0,
-                        backgroundImage: NetworkImage(user['users'][index]['user_thumbnail']),
+  return
+         FractionallySizedBox(
+          widthFactor: 0.33,
+          heightFactor: 0.8,
+          child: Container(
+            // Debug
+            color: Colors.red,
+            child: ListView.builder(
+              itemCount: user['users'].length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  children: <Widget>[
+                    Card(
+                      // Todo ca marche presque ca
+                      child: StoreConnector<HomeState, VoidCallback>(
+                        converter: (store) {
+                          // Return a `VoidCallback`, which is a fancy name for a function
+                          // with no parameters. It only dispatches an Increment action.
+                          //return () => store.dispatch(ActionsTest.Increment);
+                          return () => store.dispatch(Taped(new User(user['users'][index]['user_name'], user['users'][index]['user_firstname'], user['users'][index]['user_thumbnail'])));
+                        },
+                        builder: (context, callback) {
+                          return new InkWell(
+                            onTap: callback,
+                            child: ListTile(
+                              title: Text(user['users'][index]['user_name'], textAlign: TextAlign.right),
+                              subtitle: Text(user['users'][index]['user_firstname'], textAlign: TextAlign.right),
+                              leading: CircleAvatar(
+                                radius: 15.0,
+                                backgroundImage: NetworkImage(user['users'][index]['user_thumbnail']),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  );
-                },
-              ),
 
-                //child: InkWell(
-                /*child: InkWell(
+                      //child: InkWell(
+                      /*child: InkWell(
                   onTap: () {
 
                     // Todo change this to object en mieux
@@ -97,14 +98,18 @@ Widget _myListView(BuildContext context) {
 
 
 
-              )],
-          );
-        },
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-      ),
-    ),
-  );
+                    )],
+
+
+
+                );
+              },
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+            ),
+          ),
+        );
+
 }
 
 DisplayContactCard(context, user){

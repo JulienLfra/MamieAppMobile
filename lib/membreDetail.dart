@@ -10,7 +10,7 @@ class MembreDetail extends StatelessWidget {
     // TODO: implement build
     return FractionallySizedBox(
       widthFactor: 1,
-      heightFactor: 0.2,
+      heightFactor: 0.25,
       child: Container(
         child: Card(
           child: Column(
@@ -22,7 +22,11 @@ class MembreDetail extends StatelessWidget {
                   builder: (context, viewModel) {
                     //return Text(viewModel,style: TextStyle(fontSize: 24));
                     return ListTile(
-                      leading: Text(viewModel.user.thumbnail),
+                      leading: CircleAvatar(
+                        radius: 30.0,
+                        backgroundImage: NetworkImage(viewModel.user.thumbnail),
+                      ),
+
                       title: Text(viewModel.user.firstname + " " + viewModel.user.name),
                       subtitle: Text('Lyon.'),
                     );
@@ -40,7 +44,7 @@ class MembreDetail extends StatelessWidget {
           ),
         ),
         color: Colors.blue,
-        height: 150,
+        //height: 150,
       ),
     );
   }

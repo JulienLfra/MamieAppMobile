@@ -10,7 +10,7 @@ import 'models/user.dart';
 
 //void main() => runApp(new MyApp());
 void main() {
-  final _initialState = HomeState(new User("test", "test", "test"));
+  final _initialState = HomeState(new User("testinit", "testinit", "testinit"));
   final Store<HomeState> _store = Store<HomeState>(counterReducer, initialState: _initialState);
   runApp(MyApp(store: _store));
 }

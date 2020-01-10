@@ -18,6 +18,7 @@ environment:
 
 dependencies:
   google_maps_flutter: ^0.5.11
+
   flutter:
     sdk: flutter
   flutter_redux: ^0.5.2
