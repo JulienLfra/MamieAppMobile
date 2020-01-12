@@ -10,7 +10,7 @@ import 'models/user.dart';
 
 //void main() => runApp(new MyApp());
 void main() {
-  final _initialState = HomeState(new User("testinit", "testinit", "testinit"));
+  final _initialState = HomeState(new User("testinit", "testinit", "https://cdn.pixabay.com/photo/2019/11/23/05/06/happy-4646299_1280.jpg"));
   final Store<HomeState> _store = Store<HomeState>(counterReducer, initialState: _initialState);
   runApp(MyApp(store: _store));
 }

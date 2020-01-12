@@ -39,14 +39,6 @@ class MembreDetail extends StatelessWidget {
                       );
                     }
                 ),
-                ButtonBar(
-                  children: <Widget>[
-                    FlatButton(
-                      child: const Text('see more'),
-                      onPressed: () { print('See more details for the user'); },
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

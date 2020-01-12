@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Settings.dart';
+import 'changeFamillyButton.dart';
 import 'homeModules.dart';
 import 'listMembre.dart';
 import 'map.dart';
@@ -27,6 +28,15 @@ class Home extends StatelessWidget {
             navigateToSettingPage(context);
           },
         ),
+        actions: <Widget>[
+
+
+          ChangeFamillyButton(),
+
+
+
+
+        ],
       ),
       body: Stack(
         children: <Widget>[
