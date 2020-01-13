@@ -31,10 +31,10 @@ class MembreDetail extends StatelessWidget {
                       return ListTile(
                         leading: CircleAvatar(
                           radius: 30.0,
-                          backgroundImage: NetworkImage(viewModel.user.thumbnail),
+                          backgroundImage: NetworkImage(viewModel.userSelected.thumbnail),
                         ),
 
-                        title: Text(viewModel.user.firstname + " " + viewModel.user.name),
+                        title: Text(viewModel.userSelected.firstname + " " + viewModel.userSelected.name),
                         subtitle: Text('Lyon.'),
                       );
                     }
