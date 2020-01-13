@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/family.dart';
+import 'package:mamieapp/redux/actions.dart';
+
+import 'HomeState.dart';
 
 class ChangeFamillyButton extends StatefulWidget {
   ChangeFamillyButton({Key key}) : super(key: key);
@@ -14,7 +18,7 @@ class ChangeFamillyButton extends StatefulWidget {
 
 class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
   // Famille selectionné
-  String dropdownValue;
+  Family dropdownValue;
 
   // List initialisé a vide
   var families = new List<Family>();
@@ -22,21 +26,34 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
   // Si j'ai bien compris
   _getFamilies() {
     if(families.isEmpty == false){
-      return DropdownButton<String>(
-        value: dropdownValue,
-        style: TextStyle(color: Colors.blue),
-        onChanged: (String newValue) {
-          setState(() {
-            dropdownValue = newValue;
-          });
+      return StoreConnector<HomeState, VoidCallback>(
+        converter: (store) {
+          // Return a `VoidCallback`, which is a fancy name for a function
+          // with no parameters. It only dispatches an Increment action.
+          //return () => store.dispatch(ActionsTest.Increment);
+          return () => store.dispatch(FamilyChanged(dropdownValue));
         },
-        items: families
-            .map<DropdownMenuItem<String>>((Family value) {
-          return DropdownMenuItem<String>(
-            value: value.family_name,
-            child: Text(value.family_name),
+        builder: (context, callback) {
+
+          return DropdownButton<Family>(
+            value: dropdownValue,
+            style: TextStyle(color: Colors.blue),
+            onChanged: (Family newValue) {
+              // Important
+              callback();
+              setState(() {
+                dropdownValue = newValue;
+              });
+            },
+            items: families
+                .map<DropdownMenuItem<Family>>((Family value) {
+              return DropdownMenuItem<Family>(
+                value: value,
+                child: Text(value.family_name),
+              );
+            }).toList(),
           );
-        }).toList(),
+        }
       );
     } else {
       // Recup du Json
@@ -46,7 +63,7 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
         setState(() {
           Iterable list = json.decode(response.body);
           families = list.map((model) => Family.fromJson(model)).toList();
-          dropdownValue = families[0].family_name;
+          dropdownValue = families[0];
         });
       });
       return Container();

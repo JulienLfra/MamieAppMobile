@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'models/user.dart';
 
 class HomeState {
-  User user;
+  User userSelected;
+  List<User> menu;
 
-  HomeState(this.user);
+  HomeState(this.userSelected);
   HomeState.fromAppState(HomeState another) {
-    user = another.user;
+    userSelected = another.userSelected;
   }
 }
