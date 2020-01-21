@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/widgets/test.dart';
-//import 'package:mamieapp/widgets/myInheritedWidget.dart';
 import '../widgets/map.dart';
 import '../widgets/memberDetailCard.dart';
 import '../widgets/membersListView.dart';

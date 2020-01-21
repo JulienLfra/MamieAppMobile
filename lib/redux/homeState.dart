@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import 'models/user.dart';
+/*import 'package:mamieapp/models/user.dart';
 
 class HomeState {
   User userSelected;
@@ -10,4 +8,4 @@ class HomeState {
   HomeState.fromAppState(HomeState another) {
     userSelected = another.userSelected;
   }
-}
+}*/
