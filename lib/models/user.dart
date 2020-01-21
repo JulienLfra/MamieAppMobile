@@ -1,5 +1,3 @@
-import '../HomeState.dart';
-
 class User {
   String name;
   String firstname;

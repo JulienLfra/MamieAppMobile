@@ -1,9 +1,7 @@
-//import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 
-class ManagePicture extends StatelessWidget {
+class Message extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,17 +9,12 @@ class ManagePicture extends StatelessWidget {
         backgroundColor: new Color(0xfff8faf8),
         centerTitle: true,
         elevation: 1.0,
-        title: Text('Manage picture'),
+        title: Text('Message'),
       ),
       body: Center(
-        child: Column(
-          children: <Widget>[
-
-
-          ],
+        child: Container(
+          child: Text('To do'),
         ),
-
-
       ),
     );
   }

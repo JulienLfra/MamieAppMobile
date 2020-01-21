@@ -1,10 +1,9 @@
-import 'dart:convert';
+/*import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/user.dart';
 
-import '../HomeState.dart';
+import '../__ToDel__HomeState.dart';
 import 'actions.dart';
 
 HomeState counterReducer(HomeState state, action) {
@@ -25,4 +24,4 @@ HomeState counterReducer(HomeState state, action) {
     });
   }
   return state;
-}
+}*/
