@@ -4,7 +4,7 @@ class Family {
 
   Family(int id, String name) {
     this.family_id = id;
-    this.family_name = family_name;
+    this.family_name = name;
   }
 
   Family.fromJson(Map json)
