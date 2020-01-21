@@ -60,16 +60,6 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
     }
   }
 
-  /*initState() {
-    //super.initState();
-    //final MyInheritedWidgetState state = MyInheritedWidget.of(context);
-    //_getFamilies(state);
-  }*/
-
-  dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
 

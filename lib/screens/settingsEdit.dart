@@ -21,145 +21,138 @@ class EditSettings extends StatelessWidget {
         children: <Widget>[
           Center(
             child: Column(
-                children: <Widget>[
-                  Column(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Container(
+                      height: 70,
+                      child: Center(
+                        child: Text(
+                            "RGPD",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                      ),
+                    ),
+
+
+                    Container(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      child: FlatButton.icon(
+
+                        color: Colors.green,
+                        icon: Icon(Icons.system_update_alt),
+                        label: Text('Télécharger mes données'),
+                        onPressed: () {
+
+                        },
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width,
+                      child: FlatButton.icon(
+                        icon: Icon(Icons.delete),
+                        color: Colors.red,
+                        label: Text(
+                            'Demander la suppression de mes données'),
+                        onPressed: () {
+
+                        },
+                      ),
+
+                    ),
+                  ]
+                ),
+                //////////////// fin section RGP
+
+                ///////////////// Début fonction
+                Column(
+                  children: <Widget>[
+                    Container(
+                      height: 70,
+                      child: Center(
+                        child: Text(
+                            "Fonctions",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            )
+                        ),
+                      ),
+                    ),
+                    Row(
+
                       children: <Widget>[
-                        Container(
-                          height: 70,
-                          child: Center(
-                            child: Text(
-                                "RGPD",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                )
-                            ),
-                          ),
-                        ),
-
-
-                        Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          child: FlatButton.icon(
-
-                            color: Colors.green,
-                            icon: Icon(Icons.system_update_alt),
-                            label: Text('Télécharger mes données'),
-                            onPressed: () {
-
-                            },
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          child: FlatButton.icon(
-                            icon: Icon(Icons.delete),
-                            color: Colors.red,
-                            label: Text(
-                                'Demander la suppression de mes données'),
-                            onPressed: () {
-
-                            },
-                          ),
-
-                        ),
-                      ]
-                  ),
-                  //////////////// fin section RGP
-
-                  ///////////////// Début fonction
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        height: 70,
-                        child: Center(
+                        Center(
                           child: Text(
-                              "Fonctions",
+                              "Fonctions 1",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
+
+                                fontSize: 20,
+
                               )
                           ),
+
                         ),
-                      ),
-                      Row(
+                        SwitchWidget(),
+                      ],
+                    ),
 
-                        children: <Widget>[
-                          Center(
-                            child: Text(
-                                "Fonctions 1",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
+                    Row(
 
-                                  fontSize: 20,
+                      children: <Widget>[
+                        Center(
+                          child: Text(
+                              "Fonctions 2",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
 
-                                )
-                            ),
+                                fontSize: 20,
 
+                              )
                           ),
-                          SwitchWidget(),
-                        ],
-                      ),
 
-                      Row(
+                        ),
+                        SwitchWidget(),
+                      ],
+                    ),
+                    Row(
 
-                        children: <Widget>[
-                          Center(
-                            child: Text(
-                                "Fonctions 2",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
+                      children: <Widget>[
+                        Center(
+                          child: Text(
+                              "Fonctions 3",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
 
-                                  fontSize: 20,
+                                fontSize: 20,
 
-                                )
-                            ),
-
+                              )
                           ),
-                          SwitchWidget(),
-                        ],
-                      ),
-                      Row(
 
-                        children: <Widget>[
-                          Center(
-                            child: Text(
-                                "Fonctions 3",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-
-                                  fontSize: 20,
-
-                                )
-                            ),
-
-                          ),
-                          SwitchWidget(),
-                        ],
-                      ),
-                    ],
-                  ),
-                  /////fin focntion
-
-                ]
-
+                        ),
+                        SwitchWidget(),
+                      ],
+                    ),
+                  ],
+                ),
+              ]
             ),
-
-
           ),
-
         ],
-
       ),
       floatingActionButton: FloatingActionButton(
         // When the user presses the button, show an alert dialog containing
@@ -180,13 +173,8 @@ class EditSettings extends StatelessWidget {
         child: Icon(Icons.save),
       ),
     );
-
   }
 }
-
-
-
-
 
 class SwitchWidget extends StatefulWidget {
   @override
@@ -206,9 +194,6 @@ class SwitchWidgetClass extends State {
         switchControl = true;
         textHolder = 'Switch is ON';
       });
-      print('Switch is ON');
-      // Put your code here which you want to execute on Switch ON event.
-
     }
     else
     {
@@ -216,8 +201,6 @@ class SwitchWidgetClass extends State {
         switchControl = false;
         textHolder = 'Switch is OFF';
       });
-      print('Switch is OFF');
-      // Put your code here which you want to execute on Switch OFF event.
     }
   }
 
@@ -236,9 +219,7 @@ class SwitchWidgetClass extends State {
               inactiveTrackColor: Colors.grey,
             )
         ),
-
-          //Text('$textHolder', style: TextStyle(fontSize: 24),)
-
-        ]);
+      ]
+    );
   }
 }
