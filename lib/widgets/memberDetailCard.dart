@@ -39,7 +39,7 @@ class _MembreDetailState extends State<MembreDetail> {
                 color: settings.color2,
               ),
               elevation: 10,
-              color: settings.color3,
+              color: Colors.white,
               child: Column(
                 children: <Widget>[
                   ListTile(

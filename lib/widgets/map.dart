@@ -22,7 +22,7 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
           GoogleMap(
             //mapType: MapType.hybrid,
             initialCameraPosition: CameraPosition(
-              target: LatLng(45.788841, 4.844015),
+              target: LatLng(45.788841, 5.844015),
               zoom: 11,
             ),
             markers: _markers.values.toSet(),
@@ -45,7 +45,7 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
   }
   void _getLocation() async {
     var currentLocation = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
 
     setState(() {
       //_markers.clear();
