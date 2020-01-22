@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/family.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/screens/home.dart';
 
 class ChangeFamillyButton extends StatefulWidget {
@@ -14,6 +15,10 @@ class ChangeFamillyButton extends StatefulWidget {
 }
 
 class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
+
+  // Global settings
+  GlobalSettings settings = new GlobalSettings();
+
   // Famille selectionné
   Family family;
 
@@ -25,7 +30,8 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
     if(families.isEmpty == false){
       return DropdownButton<Family>(
         value: family,
-        style: TextStyle(color: Colors.blue),
+        isDense: true,
+        style: TextStyle(color: settings.color2),
         onChanged: (Family newValue) {
           // Important
           setState(() {
@@ -40,7 +46,9 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
             .map<DropdownMenuItem<Family>>((Family value) {
           return DropdownMenuItem<Family>(
             value: value,
-            child: Text(value.family_name),
+            child: Text(
+              value.family_name,
+            ),
           );
         }).toList(),
       );

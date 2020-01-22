@@ -9,7 +9,7 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: new Color(0xfff8faf8),
+        backgroundColor: Color(0xff19203f),
         centerTitle: true,
         elevation: 1.0,
         title: Text('Settings'),

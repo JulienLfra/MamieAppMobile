@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/screens/home.dart';
 
 import 'userDetails/FullDetail.dart';
@@ -12,6 +13,9 @@ class MembreDetail extends StatefulWidget {
 
 class _MembreDetailState extends State<MembreDetail> {
 
+  // Global settings
+  GlobalSettings settings = new GlobalSettings();
+
   @override
   Widget build(BuildContext context) {
     final MyInheritedWidgetState state = MyInheritedWidget.of(context);
@@ -20,27 +24,34 @@ class _MembreDetailState extends State<MembreDetail> {
     }
     return GestureDetector(
       onTap: (){
-        navigateToFullDetail(context);
+        navigateToFullDetail(context, state);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            height: MediaQuery
-                .of(context)
-                .size
-                .height*0.2,
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            height: MediaQuery.of(context).size.height*0.2,
             child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(40.0),
+              )+ Border.all(
+                color: settings.color2,
+              ),
+              elevation: 10,
+              color: settings.color3,
               child: Column(
                 children: <Widget>[
                   ListTile(
-                  leading: CircleAvatar(
-                  radius: 30.0,
-                  backgroundImage: NetworkImage(state.user.thumbnail),
+                    leading: CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: NetworkImage(state.user.thumbnail),
                   ),
-
-                  title: Text(state.user.firstname + " " + state.user.name),
-                  subtitle: Text('Lyon.'),
+                  title: Text(
+                    state.user.firstname + " " + state.user.name,
+                    style: TextStyle(color: settings.color1, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text("todo finir card"),
                   ),
                 ],
               ),
@@ -53,7 +64,11 @@ class _MembreDetailState extends State<MembreDetail> {
   }
 }
 
-Future navigateToFullDetail(context) async {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => FullDetail()));
-
+Future navigateToFullDetail(context, state) async {
+  Navigator.push(context, MaterialPageRoute(
+    builder: (context) => FullDetail(),
+    settings: RouteSettings(
+      arguments: state
+    )
+  ));
 }
