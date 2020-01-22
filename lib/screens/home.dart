@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/user.dart';
+import 'package:mamieapp/models/user2.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/widgets/test.dart';
 import '../widgets/map.dart';
@@ -81,7 +85,28 @@ class HomeState extends State<Home> {
 
   Future navigateToSettingPage(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Settings()));
+      context, MaterialPageRoute(
+        builder: (context) => Settings(),
+        settings: RouteSettings(
+          arguments: userLogged
+        )
+      )
+    );
+    //Navigator.push(builder: (context) => Settings()));
+  }
+
+  var tabUser = new List<User2>();
+  User2 userLogged;
+  
+  @override
+  void initState() {
+    super.initState();
+    API.getUserByMail("plaideaug83170@gmail.com").then((response) {
+      Iterable list = json.decode(response.body);
+      tabUser = list.map((model) => User2.fromJson(model)).toList();
+      userLogged = tabUser[0];
+      print(userLogged.statut);
+    });
   }
 
   @override

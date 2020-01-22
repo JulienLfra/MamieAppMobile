@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mamieapp/models/user2.dart';
 
 import 'profileEdit.dart';
 import 'settingsEdit.dart';
@@ -7,6 +8,9 @@ import 'thumbnailManager.dart';
 class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    User2 user = ModalRoute.of(context).settings.arguments;
+    print(user.statut);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff19203f),
@@ -33,7 +37,7 @@ class Settings extends StatelessWidget {
                   child: Center(
                     child: CircleAvatar(
                       radius: 110.0,
-                      backgroundImage: NetworkImage("https://cdn.pixabay.com/photo/2019/11/23/05/06/happy-4646299_1280.jpg"),
+                      backgroundImage: NetworkImage(user.photo),
                     ),
                   ),
                 )
