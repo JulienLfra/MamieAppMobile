@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:mamieapp/api/uploadPhoto.dart';
 import 'package:mamieapp/models/user2.dart';
 
 import 'profileEdit.dart';
 import 'settingsEdit.dart';
 import 'thumbnailManager.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  _Settings createState() => _Settings();
+}
+
+class _Settings extends State<Settings> {
+
   @override
   Widget build(BuildContext context) {
 
@@ -96,7 +103,10 @@ class Settings extends StatelessWidget {
                         children: <Widget>[
                           RawMaterialButton(
                             onPressed: () {
-                              navigateToManagePicturePage(context);
+                              //navigateToManagePicturePage(context);
+                              UploadPhoto test = new UploadPhoto();
+                              // Todo w8 result et rebuild pour l'image
+                              test.getImage(user);
                             },
                             child: new Icon(
                               Icons.photo_camera,
