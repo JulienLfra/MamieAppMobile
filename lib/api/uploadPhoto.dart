@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:mamieapp/models/user2.dart';
 
-class Test{
+class UploadPhoto{
 
   Future getImage(User2 user) async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
