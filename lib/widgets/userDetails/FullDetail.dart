@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mamieapp/screens/home.dart';
 import 'FullDetailInfoPerso.dart';
 import 'FullDetailMap.dart';
 import 'FullDetailPhoto.dart';
@@ -10,35 +11,29 @@ class FullDetail extends StatefulWidget {
 }
 
 class _FullDetailState extends State<FullDetail> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
-
-
-  @override
-  void dispose() {
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: new Color(0xfff8faf8),
-        centerTitle: true,
+    // Recup le setting de la page parent : membreDetailCard
+    final MyInheritedWidgetState state = ModalRoute.of(context).settings.arguments;
+
+    return MyInheritedWidget(
+        child: Scaffold(
+          appBar: AppBar(
+          backgroundColor: new Color(0xff19203f),
+          centerTitle: true,
          elevation: 1.0,
         title: Text('Détail'),
       ),
       body: PageView(
         children: <Widget>[
-
-          FullDetailPP(),
+          FullDetailPP(state.user),
           FullDetailPerso(),
           FullDetailMap(),
           FullDetailPhoto(),
 
         ],
       ),
-    );
+    ));
   }
 }

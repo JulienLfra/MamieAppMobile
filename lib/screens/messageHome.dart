@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 
 
 class Message extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Global settings
+    GlobalSettings settings = new GlobalSettings();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: new Color(0xfff8faf8),
+        backgroundColor: settings.color1,
         centerTitle: true,
         elevation: 1.0,
         title: Text('Message'),

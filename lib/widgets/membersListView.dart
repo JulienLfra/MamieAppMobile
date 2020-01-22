@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/user.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/screens/home.dart';
 
 
@@ -51,6 +52,8 @@ Widget _myListView(BuildContext context, MyInheritedWidgetState state) {
 }
 
 Widget buildMenu(BuildContext context, users, MyInheritedWidgetState state) {
+  // Global settings
+  GlobalSettings settings = new GlobalSettings();
   return FractionallySizedBox(
     widthFactor: 0.33,
     heightFactor: 0.8,
@@ -60,17 +63,40 @@ Widget buildMenu(BuildContext context, users, MyInheritedWidgetState state) {
       return Stack(
         children: <Widget>[
           Card(
+            //color: Color(0xfff1e8e2),
             child: InkWell(
               onTap: () {
                 state.selectUser(users[index]);
               },
-              child: ListTile(
-                title: Text(users[index].name, textAlign: TextAlign.right),
-                subtitle: Text(users[index].firstname, textAlign: TextAlign.right),
-                leading: CircleAvatar(
-                  radius: 15.0,
-                  backgroundImage: NetworkImage(users[index].thumbnail),
-                ),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(users[index].thumbnail),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        children: <Widget>[
+                          Center(
+                            child: Text(
+                              users[index].name,
+                              style: TextStyle(color: settings.color1, fontWeight: FontWeight.bold),
+                            )
+                          ),
+                          Center(
+                            child: Text(
+                              users[index].firstname,
+                              style: TextStyle(color: settings.color4),
+                            )
+                          ),
+                        ],
+                      ),
+                    )
+                  ),
+                ],
               ),
             )
           ),

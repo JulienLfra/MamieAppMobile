@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mamieapp/models/user.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/widgets/test.dart';
 import '../widgets/map.dart';
 import '../widgets/memberDetailCard.dart';
@@ -85,13 +86,15 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // Global settings
+    GlobalSettings settings = new GlobalSettings();
     return new MyInheritedWidget(
         child: Scaffold(
         appBar: AppBar(
-          backgroundColor: new Color(0xfff),
+          backgroundColor: settings.color1,
           centerTitle: true,
           elevation: 1.0,
-          title: Text('Mamie test'),
+          title: Text('MamieApp'),
           leading: IconButton(
             icon: const Icon(Icons.settings_applications),
             tooltip: 'Settings',

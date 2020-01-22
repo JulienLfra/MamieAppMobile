@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 
 class MyGoogleMap extends StatefulWidget {
   @override
@@ -8,6 +9,10 @@ class MyGoogleMap extends StatefulWidget {
 }
 
 class MyGoogleSampleState extends State<MyGoogleMap> {
+
+  // Global settings
+  GlobalSettings settings = new GlobalSettings();
+
   final Map<String, Marker> _markers = {};
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,16 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
           GoogleMap(
             //mapType: MapType.hybrid,
             initialCameraPosition: CameraPosition(
-              target: LatLng(45.788841, 4.844015),
+              target: LatLng(45.788841, 5.844015),
               zoom: 11,
             ),
             markers: _markers.values.toSet(),
           ),
-          Align(alignment: Alignment.topRight,
+          Positioned(
+            top: 10,
+            right: 10,
             child: FloatingActionButton(
-              backgroundColor: Colors.red,
+              backgroundColor: settings.color2,
               onPressed: _getLocation,
               tooltip: 'Get Location',
               child: Icon(
@@ -38,7 +45,7 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
   }
   void _getLocation() async {
     var currentLocation = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
 
     setState(() {
       //_markers.clear();
