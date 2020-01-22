@@ -30,6 +30,23 @@ class User2 {
       age = json['age']
     ;
 
+  Map<String, dynamic> toJson() =>
+      {
+        'id':id,
+        'nom': nom,
+        'prenom': prenom,
+        'mail':mail,
+        'dateDeNaissance':dateDeNaissance ,
+        'ville': ville,
+        'pays' :pays,
+        'photo': photo,
+        'profession': profession,
+        'diplome': diplome,
+        'statut': statut,
+        'age':age
+      };
+
+
   // Facto de Julien
   /*
     factory User2.fromJson(dynamic json) {

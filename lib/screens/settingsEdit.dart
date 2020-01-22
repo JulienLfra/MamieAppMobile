@@ -8,6 +8,7 @@ class EditSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: new Color(0xfff8faf8),

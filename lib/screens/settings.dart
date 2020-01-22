@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mamieapp/models/user2.dart';
+import 'package:mamieapp/widgets/membersListView.dart';
 
 import 'profileEdit.dart';
 import 'settingsEdit.dart';
@@ -54,7 +55,7 @@ class Settings extends StatelessWidget {
                             children: <Widget>[
                               RawMaterialButton(
                                 onPressed: () {
-                                  navigateToEditSettingPage(context);
+                                  navigateToEditSettingPage(context,user);
                                 },
                                 child: new Icon(
                                   Icons.settings,
@@ -73,7 +74,7 @@ class Settings extends StatelessWidget {
                             children: <Widget>[
                               RawMaterialButton(
                                 onPressed: () {
-                                  navigateToEditProfilePage(context);
+                                  navigateToEditProfilePage(context,user);
                                 },
                                 child: new Icon(
                                   Icons.edit,
@@ -120,11 +121,21 @@ class Settings extends StatelessWidget {
       ),
     );
   }
-  Future navigateToEditSettingPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EditSettings()));
+  Future navigateToEditSettingPage(context,user) async {
+    print(user);
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => EditSettings(),
+    settings: RouteSettings(
+      arguments: user
+    )));
   }
-  Future navigateToEditProfilePage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfil()));
+  Future navigateToEditProfilePage(context,user) async {
+    print(user);
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => EditProfil(),
+        settings: RouteSettings(
+        arguments: user
+    )));
   }
   Future navigateToManagePicturePage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ManagePicture()));
