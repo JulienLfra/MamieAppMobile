@@ -30,15 +30,14 @@ class _MembreDetailState extends State<MembreDetail> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            height: MediaQuery.of(context).size.height*0.2,
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 30),
+            height: MediaQuery.of(context).size.height*0.1,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(40.0),
               )+ Border.all(
                 color: settings.color2,
               ),
-              elevation: 10,
               color: Colors.white,
               child: Column(
                 children: <Widget>[
@@ -51,7 +50,7 @@ class _MembreDetailState extends State<MembreDetail> {
                     state.user.prenom + " " + state.user.nom,
                     style: TextStyle(color: settings.color1, fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text("todo finir card"),
+                  subtitle: Text(state.user.age.toString()+" ans, "+state.user.profession+" à "+state.user.ville),
                   ),
                 ],
               ),

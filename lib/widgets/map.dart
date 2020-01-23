@@ -16,11 +16,12 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
   final Map<String, Marker> _markers = {};
   @override
   Widget build(BuildContext context) {
+    print("marker");
+    print(_markers.values.toSet());
     return new Scaffold(
       body: Stack(
         children: <Widget>[
           GoogleMap(
-            //mapType: MapType.hybrid,
             initialCameraPosition: CameraPosition(
               target: LatLng(45.788841, 5.844015),
               zoom: 11,
@@ -44,9 +45,9 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
     );
   }
   void _getLocation() async {
-    var currentLocation = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
-
+    print("prout");
+    var currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+    print("yo");
     setState(() {
       //_markers.clear();
       final marker = Marker(

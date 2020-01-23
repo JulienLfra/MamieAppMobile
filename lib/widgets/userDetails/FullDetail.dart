@@ -28,7 +28,7 @@ class _FullDetailState extends State<FullDetail> {
       body: PageView(
         children: <Widget>[
           FullDetailPP(state.user),
-          FullDetailPerso(),
+          //FullDetailPerso(),
           FullDetailMap(),
           FullDetailPhoto(),
 
