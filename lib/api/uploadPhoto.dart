@@ -13,8 +13,9 @@ class UploadPhoto{
   }
 
   upload(File imageFile, User user) async {
-
-    if (imageFile == null) return;
+    // Meh
+    bool flag = true;
+    if (imageFile == null) flag = false;
     String base64Image = base64Encode(imageFile.readAsBytesSync());
     //String fileName = imageFile.path.split("/").last;
     // Todo trouver un moyen de nomer les photos
@@ -29,5 +30,6 @@ class UploadPhoto{
     }).catchError((err) {
       print(err);
     });
+    return flag;
   }
 }

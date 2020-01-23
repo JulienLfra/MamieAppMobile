@@ -45,9 +45,7 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
     );
   }
   void _getLocation() async {
-    print("prout");
     var currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
-    print("yo");
     setState(() {
       //_markers.clear();
       final marker = Marker(
