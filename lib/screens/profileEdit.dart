@@ -109,7 +109,7 @@ class _EditProfilState extends State<EditProfil> {
                       Flexible(
                         //height: 30,
                         child: Text(
-                            "Nom",
+                            "Prénom",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20,
@@ -136,7 +136,7 @@ class _EditProfilState extends State<EditProfil> {
                   Flexible(
                     //height: 30,
                     child: Text(
-                        "Prénom",
+                        "Nom",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
@@ -453,31 +453,11 @@ class _EditProfilState extends State<EditProfil> {
           //tabUser = list.map((model) => User2.fromJson(model)).toList();
 
         },
-
-
-//        onPressed: () {
-//
-//
-//
-//          return showDialog(
-//            context: context,
-//            builder: (context) {
-//              return AlertDialog(
-//                // Retrieve the text the that user has entered by using the
-//                // TextEditingController.
-//                content: Text(prenomController.text + nomController.text),
-//              );
-//            },
-//          );
-//        },
         tooltip: 'Show me the value!',
         child: Icon(Icons.save),
       ),
-
-
     );
   }
-
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.

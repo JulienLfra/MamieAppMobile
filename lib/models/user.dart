@@ -23,8 +23,8 @@ class User {
   String statut;
   int age;
 
-  //User2(this.id, this.nom, this.prenom, this.mail, this.dateDeNaissance, this.ville, this.pays, this.photo, this.profession, this.diplome, this.statut, this.age);
-  User();
+  User(this.id, this.nom, this.prenom, this.mail, this.dateDeNaissance, this.ville, this.pays, this.photo, this.profession, this.diplome, this.statut, this.age);
+  //User();
 
   User.fromJson(Map json)
       : id = json['id'],

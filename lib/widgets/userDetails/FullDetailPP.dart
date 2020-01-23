@@ -29,7 +29,18 @@ class FullDetailPP extends StatelessWidget {
                 user.prenom+" "+user.nom,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
-              Text("Todo add les info récup de la real db"),
+              Text(user.statut, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pinkAccent)),
+              Text(""),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text("Age : "+user.age.toString()),
+                  Text("Habite : "+user.ville+", "+user.pays),
+                  Text("Diplome : "+user.diplome),
+                  Text("Profession : "+user.profession),
+                ],
+              )
             ]
           ),
         ),

@@ -153,7 +153,8 @@ class HomeState extends State<Home> {
         ),
         body: Stack(
             children: <Widget>[
-              //Test(),
+              // Test widget for new features
+              //MyApp(),
               MyGoogleMap(),
               ListMembre(),
               MembreDetail(),
