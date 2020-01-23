@@ -4,17 +4,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/family.dart';
+import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/screens/home.dart';
 
 class ChangeFamillyButton extends StatefulWidget {
-  ChangeFamillyButton({Key key}) : super(key: key);
-  
+  //ChangeFamillyButton({Key key}) : super(key: key);
+
+  User user;
+  ChangeFamillyButton(this.user);
+
   @override
-  _ChangeFamillyButtonState createState() => _ChangeFamillyButtonState();
+  _ChangeFamillyButtonState createState() => _ChangeFamillyButtonState(user);
 }
 
 class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
+
+  User user;
+
+  _ChangeFamillyButtonState(this.user);
 
   // Global settings
   GlobalSettings settings = new GlobalSettings();
@@ -53,15 +61,14 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
         }).toList(),
       );
     } else {
-      // Recup du Json
-      //API.getFamilies().then((response) {
-      API.getFamiliesByMail("plaideaug83170@gmail.com").then((response) {
+      API.getFamiliesByMail(user.mail).then((response) {
         // Le setState enregistre les variables dont famillies qui ne sera plus vide dans le if
         // Todo Comment le build sait qu'il y a un changement ?
         setState(() {
           Iterable list = json.decode(response.body);
           families = list.map((model) => Family.fromJson(model)).toList();
           family = families[0];
+
         });
         state.selectFamily(families[0]);
       });
