@@ -74,7 +74,23 @@ class _LoginButton extends State<LoginButton> {
           user = users[0];
         });
       });
-      return Container();
+      return Container(
+          //child: Text("Pas de Users, verifiez la connexion")
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text("Pas de Users, verifiez la connexion"),
+              FloatingActionButton(
+                child: Icon(Icons.autorenew),
+                onPressed: (){
+                  setState(() {
+
+                  });
+                },
+              )
+            ],
+          )
+      );
     }
   }
 

@@ -1,17 +1,17 @@
 class Family {
-  String id_famille;
+  String id;
   String nom;
 
-  Family(String id_famille, String nom) {
-    this.id_famille = id_famille;
+  Family(String id, String nom) {
+    this.id = id;
     this.nom = nom;
   }
 
   Family.fromJson(Map json)
-      : id_famille = json['id_famille'].toString(),
+      : id = json['id'].toString(),
         nom = json['nom'];
 
   Map toJson() {
-    return {'id_famille': id_famille, 'nom': nom};
+    return {'id': id, 'nom': nom};
   }
 }

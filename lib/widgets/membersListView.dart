@@ -33,10 +33,10 @@ class _ListMembre extends State<ListMembre> {
 List<User> users;
 
 Widget _myListView(BuildContext context, MyInheritedWidgetState state) {
+  print(state.family.id);
   // Todo : Appel ajax puis Affichege list
   return FutureBuilder<Response>(
-    //future: API.getMembersByFamilyId(state.family.id),
-    future: API.getMembersByFamilyId(state.family.id_famille),
+    future: API.getMembersByFamilyId(state.family.id),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         Iterable list = json.decode(snapshot.data.body);

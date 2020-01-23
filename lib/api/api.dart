@@ -21,14 +21,9 @@ class API {
   }
 
   static Future getMembersByFamilyId(String id) {
-    var url = baseUrl + "http://35.180.28.149:5000/membresFamilleById?id_famille="+id;
+    var url = baseUrl + "http://35.180.28.149:5000/membresFamilleById?id="+id;
     return http.get(url);
   }
-
-  /*static Future getMembersByFamilyName(String nom) {
-    var url = baseUrl + "http://35.180.28.149:5000/membresFamille?mail="+nom;
-    return http.get(url);
-  }*/
 
   static Future getUserByMail(String mail) async {
     var url = baseUrl + "http://35.180.28.149:5000/personneMail?mail="+mail;
