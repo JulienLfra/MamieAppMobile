@@ -43,5 +43,17 @@
 	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>NSPhotoLibraryUsageDescription</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Can I use the camera please?</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Can I use the mic please?</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app needs access to location when open.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>This app uses location to forecast the weather.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This app uses location to forecast the weather.</string>
 </dict>
 </plist>
