@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/widgets/test.dart';
@@ -7,6 +10,7 @@ import '../widgets/memberDetailCard.dart';
 import '../widgets/membersListView.dart';
 import '../widgets/familiesDropDownButton.dart';
 import '../models/family.dart';
+import 'messageHome.dart';
 import 'settings.dart';
 
 //---
@@ -81,7 +85,35 @@ class HomeState extends State<Home> {
 
   Future navigateToSettingPage(context) async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Settings()));
+      context, MaterialPageRoute(
+        builder: (context) => Settings(),
+        settings: RouteSettings(
+          arguments: userLogged
+        )
+      )
+    );
+  }
+
+  Future navigateToMessagePage(context) async {
+    Navigator.push(
+      context, MaterialPageRoute(
+        builder: (context) => Message()
+      )
+    );
+  }
+
+  var tabUser = new List<User>();
+  User userLogged;
+
+  @override
+  void initState() {
+    super.initState();
+    API.getUserByMail("ap@gmail.com").then((response) {
+      Iterable list = json.decode(response.body);
+      tabUser = list.map((model) => User.fromJson(model)).toList();
+      userLogged = tabUser[0];
+      print(userLogged.statut);
+    });
   }
 
   @override
@@ -104,6 +136,13 @@ class HomeState extends State<Home> {
           ),
           actions: <Widget>[
             ChangeFamillyButton(),
+            IconButton(
+              icon: const Icon(Icons.chat_bubble),
+              tooltip: 'Chat',
+              onPressed: () {
+                navigateToMessagePage(context);
+              },
+            )
           ],
         ),
         body: Stack(
@@ -111,7 +150,7 @@ class HomeState extends State<Home> {
               //Test(),
               MyGoogleMap(),
               ListMembre(),
-              MembreDetail(),
+              //MembreDetail(),
             ]
         )
       )

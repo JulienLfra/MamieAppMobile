@@ -45,10 +45,10 @@ class _MembreDetailState extends State<MembreDetail> {
                   ListTile(
                     leading: CircleAvatar(
                     radius: 30.0,
-                    backgroundImage: NetworkImage(state.user.thumbnail),
+                    backgroundImage: NetworkImage(state.user.photo),
                   ),
                   title: Text(
-                    state.user.firstname + " " + state.user.name,
+                    state.user.prenom + " " + state.user.nom,
                     style: TextStyle(color: settings.color1, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text("todo finir card"),

@@ -1,15 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:mamieapp/api/uploadPhoto.dart';
+import 'package:mamieapp/models/user.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
+import 'package:mamieapp/widgets/membersListView.dart';
 
 import 'profileEdit.dart';
 import 'settingsEdit.dart';
 import 'thumbnailManager.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  _Settings createState() => _Settings();
+}
+
+class _Settings extends State<Settings> {
+
+  GlobalSettings settings = new GlobalSettings();
+
   @override
   Widget build(BuildContext context) {
+
+    User user = ModalRoute.of(context).settings.arguments;
+    print(user.statut);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff19203f),
+        backgroundColor: settings.color1,
         centerTitle: true,
         elevation: 1.0,
         title: Text('Settings'),
@@ -33,7 +48,7 @@ class Settings extends StatelessWidget {
                   child: Center(
                     child: CircleAvatar(
                       radius: 110.0,
-                      backgroundImage: NetworkImage("https://cdn.pixabay.com/photo/2019/11/23/05/06/happy-4646299_1280.jpg"),
+                      backgroundImage: NetworkImage(user.photo),
                     ),
                   ),
                 )
@@ -50,7 +65,7 @@ class Settings extends StatelessWidget {
                             children: <Widget>[
                               RawMaterialButton(
                                 onPressed: () {
-                                  navigateToEditSettingPage(context);
+                                  navigateToEditSettingPage(context,user);
                                 },
                                 child: new Icon(
                                   Icons.settings,
@@ -69,7 +84,7 @@ class Settings extends StatelessWidget {
                             children: <Widget>[
                               RawMaterialButton(
                                 onPressed: () {
-                                  navigateToEditProfilePage(context);
+                                  navigateToEditProfilePage(context,user);
                                 },
                                 child: new Icon(
                                   Icons.edit,
@@ -92,7 +107,9 @@ class Settings extends StatelessWidget {
                         children: <Widget>[
                           RawMaterialButton(
                             onPressed: () {
-                              navigateToManagePicturePage(context);
+                              UploadPhoto uploadPhoto = new UploadPhoto();
+                              // Todo w8 result et rebuild pour l'image
+                              uploadPhoto.getImage(user);
                             },
                             child: new Icon(
                               Icons.photo_camera,
@@ -116,11 +133,21 @@ class Settings extends StatelessWidget {
       ),
     );
   }
-  Future navigateToEditSettingPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EditSettings()));
+  Future navigateToEditSettingPage(context,user) async {
+    print(user);
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => EditSettings(),
+    settings: RouteSettings(
+      arguments: user
+    )));
   }
-  Future navigateToEditProfilePage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfil()));
+  Future navigateToEditProfilePage(context,user) async {
+    print(user);
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => EditProfil(),
+        settings: RouteSettings(
+        arguments: user
+    )));
   }
   Future navigateToManagePicturePage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => ManagePicture()));

@@ -47,14 +47,15 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
           return DropdownMenuItem<Family>(
             value: value,
             child: Text(
-              value.family_name,
+              value.nom,
             ),
           );
         }).toList(),
       );
     } else {
       // Recup du Json
-      API.getFamilies().then((response) {
+      //API.getFamilies().then((response) {
+      API.getFamiliesByMail("plaideaug83170@gmail.com").then((response) {
         // Le setState enregistre les variables dont famillies qui ne sera plus vide dans le if
         // Todo Comment le build sait qu'il y a un changement ?
         setState(() {

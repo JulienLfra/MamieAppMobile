@@ -35,7 +35,10 @@ List<User> users;
 Widget _myListView(BuildContext context, MyInheritedWidgetState state) {
   // Todo : Appel ajax puis Affichege list
   return FutureBuilder<Response>(
-    future: API.getMembersByFamilyId(state.family.family_id),
+    //future: API.getMembersByFamilyId(state.family.id),
+    future: API.getMembersByFamilyName("plaideaug83170@gmail.com"),
+    // Todo replace this call and adapr User like User2
+    //future: API.getMembersByUserEmail("plaideaug83170@gmail"),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         Iterable list = json.decode(snapshot.data.body);
@@ -73,7 +76,7 @@ Widget buildMenu(BuildContext context, users, MyInheritedWidgetState state) {
                   Expanded(
                     child: CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(users[index].thumbnail),
+                      backgroundImage: NetworkImage(users[index].photo),
                     ),
                   ),
                   Expanded(
@@ -82,13 +85,13 @@ Widget buildMenu(BuildContext context, users, MyInheritedWidgetState state) {
                         children: <Widget>[
                           Center(
                             child: Text(
-                              users[index].name,
+                              users[index].nom,
                               style: TextStyle(color: settings.color1, fontWeight: FontWeight.bold),
                             )
                           ),
                           Center(
                             child: Text(
-                              users[index].firstname,
+                              users[index].prenom,
                               style: TextStyle(color: settings.color4),
                             )
                           ),

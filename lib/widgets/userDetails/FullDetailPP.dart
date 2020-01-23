@@ -23,10 +23,10 @@ class FullDetailPP extends StatelessWidget {
               CircleAvatar(
                 // le 2.1 permet le petit margin
                 radius: MediaQuery.of(context).size.width / 2.1,
-                backgroundImage: NetworkImage(user.thumbnail),
+                backgroundImage: NetworkImage(user.photo),
               ),
               Text(
-                user.firstname+" "+user.name,
+                user.prenom+" "+user.nom,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
               Text("Todo add les info récup de la real db"),
