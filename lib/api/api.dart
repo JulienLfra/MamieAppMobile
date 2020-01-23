@@ -1,13 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:mamieapp/models/user2.dart';
 
 const baseUrl = "";
 
 class API {
   static Future getFamilies() {
     var url = baseUrl + "http://benjamin.molinet.free.fr/projetMamie/getFamilies.php";
+    return http.get(url);
+  }
+
+  static Future getFamiliesByMail(String email) {
+    var url = baseUrl + "http://35.180.28.149:5000/familleMail?mail="+email;
+    return http.get(url);
+  }
+
+  static Future getMembersByFamilyName(String nom) {
+    var url = baseUrl + "http://35.180.28.149:5000/membresFamille?mail="+nom;
     return http.get(url);
   }
 

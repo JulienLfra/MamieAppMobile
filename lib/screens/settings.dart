@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mamieapp/api/uploadPhoto.dart';
-import 'package:mamieapp/models/user2.dart';
+import 'package:mamieapp/models/user.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/widgets/membersListView.dart';
 
 import 'profileEdit.dart';
@@ -14,14 +15,16 @@ class Settings extends StatefulWidget {
 
 class _Settings extends State<Settings> {
 
+  GlobalSettings settings = new GlobalSettings();
+
   @override
   Widget build(BuildContext context) {
 
-    User2 user = ModalRoute.of(context).settings.arguments;
+    User user = ModalRoute.of(context).settings.arguments;
     print(user.statut);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff19203f),
+        backgroundColor: settings.color1,
         centerTitle: true,
         elevation: 1.0,
         title: Text('Settings'),
@@ -104,10 +107,9 @@ class _Settings extends State<Settings> {
                         children: <Widget>[
                           RawMaterialButton(
                             onPressed: () {
-                              //navigateToManagePicturePage(context);
-                              UploadPhoto test = new UploadPhoto();
+                              UploadPhoto uploadPhoto = new UploadPhoto();
                               // Todo w8 result et rebuild pour l'image
-                              test.getImage(user);
+                              uploadPhoto.getImage(user);
                             },
                             child: new Icon(
                               Icons.photo_camera,

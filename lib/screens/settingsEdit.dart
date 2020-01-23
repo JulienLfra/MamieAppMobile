@@ -1,9 +1,9 @@
-
-
 import 'package:flutter/material.dart';
-
+import 'package:mamieapp/resources/globalSettings.dart';
 
 class EditSettings extends StatelessWidget {
+  GlobalSettings settings = new GlobalSettings();
+
   bool isSwitched = true;
 
   @override
@@ -11,7 +11,7 @@ class EditSettings extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: new Color(0xfff8faf8),
+        backgroundColor: settings.color1,
         centerTitle: true,
         elevation: 1.0,
         title: Text('Edit Settings'),

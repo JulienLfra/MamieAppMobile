@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:mamieapp/models/user2.dart';
+import 'package:mamieapp/models/user.dart';
 
 class Test{
 
-  Future getImage(User2 user) async {
+  Future getImage(User user) async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     upload(image, user);
   }
 
-  upload(File imageFile, User2 user) async {
+  upload(File imageFile, User user) async {
 
     if (imageFile == null) return;
     String base64Image = base64Encode(imageFile.readAsBytesSync());

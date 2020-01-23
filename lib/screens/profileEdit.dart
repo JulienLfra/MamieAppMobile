@@ -3,8 +3,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mamieapp/models/user2.dart';
+import 'package:mamieapp/api/uploadPhoto.dart';
+import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/api/api.dart';
+import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/widgets/membersListView.dart';
 
 class EditProfil extends StatefulWidget {
@@ -15,6 +17,9 @@ class EditProfil extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds the data related to the Form.
 class _EditProfilState extends State<EditProfil> {
+
+  GlobalSettings settings = new GlobalSettings();
+
   // Create a text controller and use it to retrieve the current value
   // of the TextField.
 
@@ -34,15 +39,15 @@ class _EditProfilState extends State<EditProfil> {
 
   @override
   Widget build(BuildContext context) {
-    User2 user = ModalRoute
+    User user = ModalRoute
         .of(context)
         .settings
         .arguments;
     //print(user.statut);
-    User2 tempUser =user;
+    User tempUser =user;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: new Color(0xfff8faf8),
+        backgroundColor: settings.color1,
         centerTitle: true,
         elevation: 1.0,
         title: Text('Edit profile'),
@@ -75,18 +80,6 @@ class _EditProfilState extends State<EditProfil> {
                     ),
                   )
                 ],
-              ),
-              Container(
-
-                child: FlatButton.icon(
-                  icon: Icon(Icons.mode_edit),
-                  color: Colors.grey,
-                  label: Text(
-                      'Modify Picture'),
-                  onPressed: () {
-
-                  },
-                ),
               ),
             ],
           ),
