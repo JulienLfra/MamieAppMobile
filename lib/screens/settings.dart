@@ -21,7 +21,6 @@ class _Settings extends State<Settings> {
   Widget build(BuildContext context) {
 
     User user = ModalRoute.of(context).settings.arguments;
-    print(user.statut);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: settings.color1,
@@ -134,7 +133,6 @@ class _Settings extends State<Settings> {
     );
   }
   Future navigateToEditSettingPage(context,user) async {
-    print(user);
     Navigator.push(context, MaterialPageRoute(
         builder: (context) => EditSettings(),
     settings: RouteSettings(
@@ -142,7 +140,6 @@ class _Settings extends State<Settings> {
     )));
   }
   Future navigateToEditProfilePage(context,user) async {
-    print(user);
     Navigator.push(context, MaterialPageRoute(
         builder: (context) => EditProfil(),
         settings: RouteSettings(

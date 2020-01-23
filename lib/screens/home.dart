@@ -49,7 +49,7 @@ class MyInheritedWidget extends StatefulWidget {
 //---
 class MyInheritedWidgetState extends State<MyInheritedWidget> {
 
-  Family family = new Family(0, "InitFamily");
+  Family family = new Family("0", "InitFamily");
   User user;
 
   void selectFamily(Family newFamily){
@@ -76,12 +76,18 @@ class MyInheritedWidgetState extends State<MyInheritedWidget> {
 //---
 class Home extends StatefulWidget {
 
+  User user;
+
+  Home(this.user);
+
   @override
-  HomeState createState() => new HomeState();
+  HomeState createState() => new HomeState(user);
 }
 
 //---
 class HomeState extends State<Home> {
+
+  HomeState(this.userLogged);
 
   Future navigateToSettingPage(context) async {
     Navigator.push(
@@ -108,11 +114,11 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    API.getUserByMail("ap@gmail.com").then((response) {
+    //User user = ModalRoute.of(context).settings.arguments;
+    API.getUserByMail(userLogged.mail).then((response) {
       Iterable list = json.decode(response.body);
       tabUser = list.map((model) => User.fromJson(model)).toList();
       userLogged = tabUser[0];
-      print(userLogged.statut);
     });
   }
 
@@ -126,7 +132,7 @@ class HomeState extends State<Home> {
           backgroundColor: settings.color1,
           centerTitle: true,
           elevation: 1.0,
-          title: Text('MamieApp'),
+          title: Text(userLogged.prenom+" "+userLogged.nom),
           leading: IconButton(
             icon: const Icon(Icons.settings_applications),
             tooltip: 'Settings',
@@ -135,7 +141,7 @@ class HomeState extends State<Home> {
             },
           ),
           actions: <Widget>[
-            ChangeFamillyButton(),
+            ChangeFamillyButton(userLogged),
             IconButton(
               icon: const Icon(Icons.chat_bubble),
               tooltip: 'Chat',
@@ -150,7 +156,7 @@ class HomeState extends State<Home> {
               //Test(),
               MyGoogleMap(),
               ListMembre(),
-              //MembreDetail(),
+              MembreDetail(),
             ]
         )
       )
