@@ -6,7 +6,11 @@
  */
 import 'package:flutter/material.dart';
 import 'dart:async';
-//import 'package:weather/weather.dart';
+import 'package:google_maps_webservice/places.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+
+//const kGoogleApiKey = "AIzaSyDLCcBFBb4Ke43GIF4MwPAUCcBOwpRNu2A";
+//GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: kGoogleApiKey);
 
 void main() => runApp(MyApp());
 
@@ -16,37 +20,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  /*
-  String _res = 'Unknown';
-  String key = '12b6e28582eb9298577c734a31ba9f4f';
-  WeatherStation ws;
 
-  @override
-  void initState() {
-    super.initState();
-    ws = new WeatherStation(key);
-    initPlatformState();
-  }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    queryWeather();
-  }
 
-  void queryForecast() async {
-    List<Weather> f = await ws.fiveDayForecast();
-    setState(() {
-      _res = f.toString();
-    });
-  }
-
-  void queryWeather() async {
-    Weather w = await ws.currentWeather();
-    setState(() {
-      _res = w.toString();
-    });
-  }
-  */
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

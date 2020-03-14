@@ -8,6 +8,9 @@ import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/screens/home.dart';
 
+///////////
+import 'package:google_maps_webservice/places.dart';
+
 class LoginButton extends StatefulWidget {
   //LoginButton({Key key}) : super(key: key);
 
@@ -16,6 +19,16 @@ class LoginButton extends StatefulWidget {
 }
 
 class _LoginButton extends State<LoginButton> {
+
+  ////////////////
+  final places = new GoogleMapsPlaces(apiKey: "AIzaSyDLCcBFBb4Ke43GIF4MwPAUCcBOwpRNu2A");
+
+  // Todo : Connecter ca a la bonn epage de julien
+  Future<void> test() async {
+    PlacesSearchResponse reponse = await places.searchNearbyWithRadius(new Location(43.534551, 6.462102), 500);
+    print("Hey");
+    print(reponse.results[2].name);
+  }
 
   // Global settings
   GlobalSettings settings = new GlobalSettings();
@@ -39,6 +52,7 @@ class _LoginButton extends State<LoginButton> {
 
   // Si j'ai bien compris
   _getUsers() {
+    test();
     if(users.isEmpty == false){
       return DropdownButton<User>(
         value: user,
