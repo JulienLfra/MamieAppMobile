@@ -38,8 +38,7 @@ class API {
   }
 
   static Future getEventByMail(String mail) async {
-    var url = baseUrl + "http://35.180.228.4:5000/evenementsByUserMail=" + mail;
-    print(url);
+    var url = baseUrl + "http://35.180.228.4:5000/evenementsByUserMail?mail=" + mail;
     final resp = await http.get(url);
     if (resp.statusCode == 200) {
       return resp;
@@ -50,9 +49,9 @@ class API {
   }
 
   Future setUserByMail( String mail, {String body}) async {
-    print("send 1");
+
     return http.post("http://35.180.28.149:5000/personneMail?mail=" + mail, body: body).then((http.Response response) {
-      print("send 2");
+
       final int statusCode = response.statusCode;
 
       if (statusCode < 200 || statusCode > 400 || json == null) {

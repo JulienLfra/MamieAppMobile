@@ -140,7 +140,8 @@ Widget _myListView(BuildContext context) {
 
         Iterable list = json.decode(response.body);
         events = list.map((model) => Event.fromJson(model)).toList();
-        print(list );
+        print("List :");
+        print(list);
       });
 
 
