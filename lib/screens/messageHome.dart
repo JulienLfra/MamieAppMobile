@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
+import '../widgets/EvenementListView.dart';
 
 
 class Message extends StatelessWidget {
@@ -12,12 +13,19 @@ class Message extends StatelessWidget {
         backgroundColor: settings.color1,
         centerTitle: true,
         elevation: 1.0,
-        title: Text('Message'),
+        title: Text('Evenement'),
       ),
-      body: Center(
-        child: Container(
-          child: Text('To do'),
-        ),
+      body:
+
+        Stack(
+
+            children: <Widget>[
+
+
+            ListEvenement(),
+
+        ]
+
       ),
     );
   }
