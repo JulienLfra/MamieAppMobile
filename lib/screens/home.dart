@@ -137,6 +137,7 @@ class HomeState extends State<Home> {
             icon: const Icon(Icons.settings_applications),
             tooltip: 'Settings',
             onPressed: () {
+              print("salut");
               navigateToSettingPage(context);
             },
           ),
@@ -146,6 +147,7 @@ class HomeState extends State<Home> {
               icon: const Icon(Icons.chat_bubble),
               tooltip: 'Chat',
               onPressed: () {
+                print("salut1");
                 navigateToMessagePage(context);
               },
             )
