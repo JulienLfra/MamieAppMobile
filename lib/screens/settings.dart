@@ -30,7 +30,7 @@ class _Settings extends State<Settings> {
       ),
       body: Center(
         child: Column(
-          children: <Widget>[
+        children: <Widget>[
 
             Stack(
               children: <Widget>[
