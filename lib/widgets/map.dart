@@ -45,12 +45,12 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
     );
   }
   void _getLocation() async {
-    var currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     setState(() {
       //_markers.clear();
       final marker = Marker(
         markerId: MarkerId("curr_loc"),
-        position: LatLng(currentLocation.latitude, currentLocation.longitude),
+        position: LatLng(position.latitude, position.longitude),
         infoWindow: InfoWindow(title: 'Your Location'),
       );
       _markers["Current Location"] = marker;

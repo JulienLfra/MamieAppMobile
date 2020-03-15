@@ -1,10 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:mamieapp/api/uploadPhoto.dart';
 import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/widgets/membersListView.dart';
+
+import 'package:google_maps_webservice/places.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../api/api.dart';
 import '../models/event.dart';
@@ -17,12 +21,60 @@ class EventAdd extends StatefulWidget {
 
 class _EventAdd extends State<EventAdd> {
 
+  final places = new GoogleMapsPlaces(apiKey: "AIzaSyDLCcBFBb4Ke43GIF4MwPAUCcBOwpRNu2A");
+
+
   GlobalSettings settings = new GlobalSettings();
 
   final nomController = TextEditingController();
   final dateController = TextEditingController();
   final lieuController = TextEditingController();
   final photoController = TextEditingController();
+
+//  PlacesSearchResult dropdownValue;
+//  List<PlacesSearchResult> placesList;
+  var placesList = new List<PlacesSearchResult>();
+
+//  getPlacesAroundMe() async {
+//    var currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+//    PlacesSearchResponse reponse = await places.searchNearbyWithRadius(new Location(currentLocation.latitude, currentLocation.longitude), 500);
+//    setState(() {
+//      placesList = reponse.results;
+//    });
+//  }
+  getPlacesAroundMe() async {
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    PlacesSearchResponse reponse = await places.searchNearbyWithRadius(new Location(position.latitude, position.longitude), 500);
+    return reponse;
+  }
+
+
+
+
+  _listingEvent(list) {
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 400, // fixed height
+          child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(8),
+              itemCount: list.results.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 50,
+                  child: Center(child: Text(' ${list.results[index].name}')),
+                );
+              }
+          ),
+        ),
+      ],
+    );
+  }
+
+
+
 
 
   @override
@@ -39,6 +91,19 @@ class _EventAdd extends State<EventAdd> {
       body:
       ListView(
         children: <Widget>[
+
+
+          FutureBuilder(
+            future: getPlacesAroundMe(),
+            builder: (context, snapshot){
+              if(snapshot.connectionState == ConnectionState.done) return _listingEvent(snapshot.data);
+              else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return CircularProgressIndicator();
+            },
+          ),
+
 
           Row(
 
