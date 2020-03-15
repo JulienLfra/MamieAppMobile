@@ -10,6 +10,11 @@ class API {
     return http.get(url);
   }
 
+  static Future getPlaces() {
+    var url = baseUrl + "http://35.180.228.4:5000/personnes";
+    return http.get(url);
+  }
+
   static Future getFamilies() {
     var url = baseUrl + "http://benjamin.molinet.free.fr/projetMamie/getFamilies.php";
     return http.get(url);
