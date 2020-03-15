@@ -20,6 +20,7 @@ class EventAdd extends StatefulWidget {
 }
 
 class _EventAdd extends State<EventAdd> {
+  bool Placefind = false ;
 
   final places = new GoogleMapsPlaces(apiKey: "AIzaSyDLCcBFBb4Ke43GIF4MwPAUCcBOwpRNu2A");
 
@@ -34,6 +35,7 @@ class _EventAdd extends State<EventAdd> {
 //  PlacesSearchResult dropdownValue;
 //  List<PlacesSearchResult> placesList;
   var placesList = new List<PlacesSearchResult>();
+  String selectedPlace ="choose a place";
 
 //  getPlacesAroundMe() async {
 //    var currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
@@ -52,7 +54,42 @@ class _EventAdd extends State<EventAdd> {
 
 
   _listingEvent(list) {
-    return Column(
+
+
+print(list.results[0]);
+int start = 0;
+List<String> listPlace = new List();
+
+for ( int i = 0; i <  list.results.length; i++)
+  {
+    listPlace.add(list.results[i].name);
+  }
+
+    return
+          new DropdownButton<String>(
+            hint: Text(selectedPlace),
+              onChanged: (newVal) { selectedPlace = newVal;
+               print(selectedPlace);
+              //this.setState(() {});
+               },
+
+            items:listPlace.map((String value){
+      return new DropdownMenuItem<String>(
+      value: value,
+      child: new Text(value),
+    );
+          }).toList(),
+
+            //onChanged: (newVal) { selectedPlace = newVal;
+           // print(selectedPlace);
+           // },
+        );
+
+
+
+
+
+    /*return Column(
       children: <Widget>[
         SizedBox(
           height: 400, // fixed height
@@ -70,7 +107,7 @@ class _EventAdd extends State<EventAdd> {
           ),
         ),
       ],
-    );
+    );*/
   }
 
 
@@ -80,7 +117,7 @@ class _EventAdd extends State<EventAdd> {
   @override
   Widget build(BuildContext context) {
 
-    Event tempEvent;
+    Event tempEvent= new Event(1, "", "", "", "", "") ;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: settings.color1,
@@ -93,16 +130,7 @@ class _EventAdd extends State<EventAdd> {
         children: <Widget>[
 
 
-          FutureBuilder(
-            future: getPlacesAroundMe(),
-            builder: (context, snapshot){
-              if(snapshot.connectionState == ConnectionState.done) return _listingEvent(snapshot.data);
-              else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
-              }
-              return CircularProgressIndicator();
-            },
-          ),
+
 
 
           Row(
@@ -191,16 +219,15 @@ class _EventAdd extends State<EventAdd> {
                     )
                 ),
               ),
-              Flexible(
-                child:Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: "lieu"
-                    ),
-                    controller: lieuController,
-                  ),
-                ),
+              FutureBuilder(
+                future: getPlacesAroundMe(),
+                builder: (context, snapshot){
+                  if(snapshot.connectionState == ConnectionState.done) return _listingEvent(snapshot.data);
+                  else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return CircularProgressIndicator();
+                },
               ),
             ],
           ),
@@ -247,7 +274,10 @@ class _EventAdd extends State<EventAdd> {
             //nothing to do
           }
           else {
+
+            print(nomController);
             tempEvent.nom =nomController.text;
+
           }
           if (dateController.text =="") {
             //nothing to do
@@ -256,10 +286,11 @@ class _EventAdd extends State<EventAdd> {
             tempEvent.date =dateController.text;
           }
           if (lieuController.text =="") {
+            tempEvent.lieu = selectedPlace;
             //nothing to do
           }
           else {
-            tempEvent.lieu =lieuController.text;
+            tempEvent.lieu = selectedPlace;
           }
           if (photoController.text =="") {
             //nothing to do
@@ -272,16 +303,28 @@ class _EventAdd extends State<EventAdd> {
 
 
           //put tempUser
-          print("send 0");
-          String userEncoded  = json.encode(tempEvent);
-          print("send 0,1");
+
+          print("id");
+          print(tempEvent.id);
+          print("nom");
+          print(tempEvent.nom);
+          print("date");
+          print(tempEvent.date);
+          print("lieu");
+          print(tempEvent.lieu);
+          print("photo");
+          print(tempEvent.photo);
+          print("famille");
+          print(tempEvent.famille);
+          String tempEncoded  = json.encode(tempEvent);
 
 
-          //API().setUserByMail(tempEvent.mail, body: userEncoded);
+
+         API().setEvent(tempEncoded);
           //tabUser = list.map((model) => User2.fromJson(model)).toList();
 
         },
-        tooltip: 'Show me the value!',
+        tooltip: 'Show me the  value!',
         child: Icon(Icons.save),
       ),
 

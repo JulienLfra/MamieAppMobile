@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:mamieapp/models/event.dart';
 
 const baseUrl = "";
 
@@ -55,7 +56,36 @@ class API {
 
   Future setUserByMail( String mail, {String body}) async {
 
-    return http.post("http://35.180.28.149:5000/personneMail?mail=" + mail, body: body).then((http.Response response) {
+    return http.post("http://35.180.228.4:5000/personneMail?mail=" + mail, body: body).then((http.Response response) {
+
+      final int statusCode = response.statusCode;
+
+      if (statusCode < 200 || statusCode > 400 || json == null) {
+        throw new Exception("Error while fetching data");
+      }
+      //return User2.fromJson(json.decode(response.body));
+    });
+  }
+
+
+
+  Future setEvent( String body) async {
+
+    print("idTest");
+    /*print(body.id);
+    print("nom");
+    print(body.nom);
+    print("date");
+    print(body.date);
+    print("lieu");
+    print(body.lieu);
+    print("photo");
+    print(body.photo);
+    print("famille");
+    print(body.famille);*/
+    print(body);
+
+    return http.post("http://35.180.228.4:5000/evenement", body: body).then((http.Response response) {
 
       final int statusCode = response.statusCode;
 
