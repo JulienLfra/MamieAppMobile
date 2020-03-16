@@ -1,32 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 
+import 'package:geolocator/geolocator.dart';
+
+
 class MyGoogleMap extends StatefulWidget {
+
+  List<User> users;
+
+  MyGoogleMap(users){
+    this.users = users;
+  }
+
   @override
-  State<MyGoogleMap> createState() => MyGoogleSampleState();
+  State<MyGoogleMap> createState() => MyGoogleSampleState(users);
 }
 
 class MyGoogleSampleState extends State<MyGoogleMap> {
 
+  List<User> users;
+
+  MyGoogleSampleState(users){
+    this.users = users;
+  }
+
   // Global settings
   GlobalSettings settings = new GlobalSettings();
 
-  final Map<String, Marker> _markers = {};
+  Future<Position> getPosition() async {
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    var markerIdVal = "1";
+    final MarkerId markerId = MarkerId(markerIdVal);
+    _markers.add(new Marker(
+      markerId: markerId,
+      position: LatLng(position.latitude, position.longitude)
+    ));
+    return position;
+  }
+
+  Set<Marker> _markers = {};
+//  final Map<String, Marker> _markers = {};
   @override
   Widget build(BuildContext context) {
-    print("marker");
-    print(_markers.values.toSet());
+//    Position position = getPosition();
     return new Scaffold(
       body: Stack(
         children: <Widget>[
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(45.788841, 5.844015),
-              zoom: 11,
-            ),
-            markers: _markers.values.toSet(),
+          FutureBuilder<Position>(
+            future: getPosition(),
+            builder: (context, snapshot){
+              if (snapshot.hasData) {
+                return GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(snapshot.data.latitude, snapshot.data.longitude),
+                    zoom: 11,
+                  ),
+                  markers: _markers,
+                );
+              } else {
+                return CircularProgressIndicator();
+              }
+            }
           ),
           Positioned(
             top: 10,
@@ -51,9 +89,9 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
       final marker = Marker(
         markerId: MarkerId("curr_loc"),
         position: LatLng(currentLocation.latitude, currentLocation.longitude),
-        infoWindow: InfoWindow(title: 'Your Location'),
+        infoWindow: InfoWindow(title: "U"),
       );
-      _markers["Current Location"] = marker;
+//      _markers["Current Location"] = marker;
     });
   }
 }

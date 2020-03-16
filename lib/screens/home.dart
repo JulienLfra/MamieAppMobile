@@ -111,6 +111,8 @@ class HomeState extends State<Home> {
   var tabUser = new List<User>();
   User userLogged;
 
+  List<User> users;
+
   @override
   void initState() {
     super.initState();
@@ -157,7 +159,7 @@ class HomeState extends State<Home> {
             children: <Widget>[
               // Test widget for new features
               //MyApp(),
-              MyGoogleMap(),
+              MyGoogleMap(users),
               ListMembre(),
               MembreDetail(),
             ]
