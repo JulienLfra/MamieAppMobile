@@ -5,30 +5,33 @@ import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:mamieapp/screens/home.dart';
 
 
 class MyGoogleMap extends StatefulWidget {
 
-  List<User> users;
-
-  MyGoogleMap(users){
-    this.users = users;
-  }
+  BuildContext context;
+  MyGoogleMap(context){this.context = context;}
 
   @override
-  State<MyGoogleMap> createState() => MyGoogleSampleState(users);
+  State<MyGoogleMap> createState() => MyGoogleSampleState(context);
 }
 
 class MyGoogleSampleState extends State<MyGoogleMap> {
 
-  List<User> users;
+  BuildContext context;
+  MyGoogleSampleState(context){this.context = context;}
 
-  MyGoogleSampleState(users){
-    this.users = users;
-  }
+
+  List<User> users;
 
   // Global settings
   GlobalSettings settings = new GlobalSettings();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Future<Position> getPosition() async {
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
@@ -37,7 +40,8 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
     final MarkerId markerId = MarkerId(markerIdVal);
     _markers.add(new Marker(
       markerId: markerId,
-      position: LatLng(position.latitude, position.longitude)
+      position: LatLng(position.latitude, position.longitude),
+        infoWindow: InfoWindow(title: "Vous"),
     ));
     return position;
   }
@@ -46,6 +50,17 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
 //  final Map<String, Marker> _markers = {};
   @override
   Widget build(BuildContext context) {
+
+    _markers.clear();
+    final MyInheritedWidgetState state = MyInheritedWidget.of(context);
+    state.users.forEach((user) => _markers.add(new Marker(
+        markerId: new MarkerId(user.mail),
+        position: LatLng(user.latitude, user.longitude),
+        infoWindow: InfoWindow(title: user.prenom, snippet: user.ville),
+        onTap: () {
+          state.selectUser(user);
+        },
+    )));
 //    Position position = getPosition();
     return new Scaffold(
       body: Stack(
@@ -85,7 +100,6 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
   void _getLocation() async {
     Position currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     setState(() {
-      //_markers.clear();
       final marker = Marker(
         markerId: MarkerId("curr_loc"),
         position: LatLng(currentLocation.latitude, currentLocation.longitude),
