@@ -13,17 +13,16 @@ import 'package:geolocator/geolocator.dart';
 import '../api/api.dart';
 import '../models/event.dart';
 
-
 class EventAdd extends StatefulWidget {
   @override
   _EventAdd createState() => _EventAdd();
 }
 
 class _EventAdd extends State<EventAdd> {
-  bool Placefind = false ;
+  bool Placefind = false;
 
-  final places = new GoogleMapsPlaces(apiKey: "AIzaSyDLCcBFBb4Ke43GIF4MwPAUCcBOwpRNu2A");
-
+  final places =
+      new GoogleMapsPlaces(apiKey: "AIzaSyDLCcBFBb4Ke43GIF4MwPAUCcBOwpRNu2A");
 
   GlobalSettings settings = new GlobalSettings();
 
@@ -35,7 +34,7 @@ class _EventAdd extends State<EventAdd> {
 //  PlacesSearchResult dropdownValue;
 //  List<PlacesSearchResult> placesList;
   var placesList = new List<PlacesSearchResult>();
-  String selectedPlace ="choose a place";
+  String selectedPlace = "choose a place";
 
 //  getPlacesAroundMe() async {
 //    var currentLocation = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
@@ -45,49 +44,40 @@ class _EventAdd extends State<EventAdd> {
 //    });
 //  }
   getPlacesAroundMe() async {
-    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    PlacesSearchResponse reponse = await places.searchNearbyWithRadius(new Location(position.latitude, position.longitude), 500);
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    PlacesSearchResponse reponse = await places.searchNearbyWithRadius(
+        new Location(position.latitude, position.longitude), 500);
     return reponse;
   }
 
-
-
-
   _listingEvent(list) {
+    print(list.results[0]);
+    int start = 0;
+    List<String> listPlace = new List();
 
+    for (int i = 0; i < list.results.length; i++) {
+      listPlace.add(list.results[i].name);
+    }
 
-print(list.results[0]);
-int start = 0;
-List<String> listPlace = new List();
-
-for ( int i = 0; i <  list.results.length; i++)
-  {
-    listPlace.add(list.results[i].name);
-  }
-
-    return
-          new DropdownButton<String>(
-            hint: Text(selectedPlace),
-              onChanged: (newVal) { selectedPlace = newVal;
-               print(selectedPlace);
-              //this.setState(() {});
-               },
-
-            items:listPlace.map((String value){
-      return new DropdownMenuItem<String>(
-      value: value,
-      child: new Text(value),
-    );
-          }).toList(),
-
-            //onChanged: (newVal) { selectedPlace = newVal;
-           // print(selectedPlace);
-           // },
+    return new DropdownButton<String>(
+      hint: Text(selectedPlace),
+      onChanged: (newVal) {
+        setState(() {
+          selectedPlace = newVal;
+        });
+      },
+      items: listPlace.map((String value) {
+        return new DropdownMenuItem<String>(
+          value: value,
+          child: new Text(value),
         );
+      }).toList(),
 
-
-
-
+      //onChanged: (newVal) { selectedPlace = newVal;
+      // print(selectedPlace);
+      // },
+    );
 
     /*return Column(
       children: <Widget>[
@@ -110,14 +100,9 @@ for ( int i = 0; i <  list.results.length; i++)
     );*/
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
-
-    Event tempEvent= new Event(1, "", "", "", "", "") ;
+    Event tempEvent = new Event(1, "", "", "", "", "");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: settings.color1,
@@ -125,104 +110,79 @@ for ( int i = 0; i <  list.results.length; i++)
         elevation: 1.0,
         title: Text('Add Event'),
       ),
-      body:
-      ListView(
+      body: ListView(
         children: <Widget>[
-
-
-
-
-
           Row(
-
             children: <Widget>[
               Container(
                 height: 40,
-                child:  Text(
-                    "Ajouter un nouvelle evenement",
+                child: Text("Ajouter un nouvelle evenement",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-
-                    )
-                ),
+                    )),
               ),
-
-
-
             ],
           ),
           Row(
             children: <Widget>[
               Flexible(
                 //height: 30,
-                child: Text(
-                    "Nom",
+                child: Text("Nom",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
-                    )
-                ),
+                    )),
               ),
               Flexible(
-                child:Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextField(
-                    decoration: InputDecoration(
-                        hintText: "nom"
-                    ),
+                    decoration: InputDecoration(hintText: "nom"),
                     controller: nomController,
                   ),
                 ),
               ),
             ],
           ),
-
-
           Row(
             children: <Widget>[
               Flexible(
                 //height: 30,
-                child: Text(
-                    "Date",
+                child: Text("Date",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
-                    )
-                ),
+                    )),
               ),
               Flexible(
-                child:Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextField(
-                    decoration: InputDecoration(
-                        hintText: "Date"
-                    ),
+                    decoration: InputDecoration(hintText: "Date"),
                     controller: dateController,
                   ),
                 ),
               ),
             ],
           ),
-
           Row(
             children: <Widget>[
               Flexible(
                 //height: 30,
-                child: Text(
-                    "lieu",
+                child: Text("lieu",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
-                    )
-                ),
+                    )),
               ),
               FutureBuilder(
                 future: getPlacesAroundMe(),
-                builder: (context, snapshot){
-                  if(snapshot.connectionState == ConnectionState.done) return _listingEvent(snapshot.data);
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done)
+                    return _listingEvent(snapshot.data);
                   else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
@@ -231,76 +191,57 @@ for ( int i = 0; i <  list.results.length; i++)
               ),
             ],
           ),
-
-
           Row(
             children: <Widget>[
               Flexible(
                 //height: 30,
-                child: Text(
-                    "Photo",
+                child: Text("Photo",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
-                    )
-                ),
+                    )),
               ),
               Flexible(
-                child:Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextField(
-                    decoration: InputDecoration(
-                        hintText: "photo"
-                    ),
+                    decoration: InputDecoration(hintText: "photo"),
                     controller: photoController,
                   ),
                 ),
               ),
             ],
           ),
-
         ],
       ),
       floatingActionButton: FloatingActionButton(
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () async {
-
           //Add the changes to the temp user
 
-
-
-          if (nomController.text =="") {
+          if (nomController.text == "") {
             //nothing to do
-          }
-          else {
-
+          } else {
             print(nomController);
-            tempEvent.nom =nomController.text;
-
+            tempEvent.nom = nomController.text;
           }
-          if (dateController.text =="") {
+          if (dateController.text == "") {
             //nothing to do
+          } else {
+            tempEvent.date = dateController.text;
           }
-          else {
-            tempEvent.date =dateController.text;
-          }
-          if (lieuController.text =="") {
+          if (lieuController.text == "") {
             tempEvent.lieu = selectedPlace;
             //nothing to do
-          }
-          else {
+          } else {
             tempEvent.lieu = selectedPlace;
           }
-          if (photoController.text =="") {
+          if (photoController.text == "") {
             //nothing to do
+          } else {
+            tempEvent.photo = photoController.text;
           }
-          else {
-            tempEvent.photo =photoController.text;
-          }
-
-
-
 
           //put tempUser
 
@@ -316,18 +257,14 @@ for ( int i = 0; i <  list.results.length; i++)
           print(tempEvent.photo);
           print("famille");
           print(tempEvent.famille);
-          String tempEncoded  = json.encode(tempEvent);
+          String tempEncoded = json.encode(tempEvent);
 
-
-
-         API().setEvent(tempEncoded);
+          API().setEvent(tempEncoded);
           //tabUser = list.map((model) => User2.fromJson(model)).toList();
-
         },
         tooltip: 'Show me the  value!',
         child: Icon(Icons.save),
       ),
-
     );
   }
 }
