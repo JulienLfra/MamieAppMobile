@@ -26,7 +26,7 @@ class Event {
         'date':date ,
         'lieu': lieu,
         'photo': photo,
-        'famille': famille,
+        'famille': {},
 
       };
 }

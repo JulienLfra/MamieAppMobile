@@ -7,7 +7,7 @@ import 'package:mamieapp/resources/globalSettings.dart';
 import 'package:mamieapp/screens/home.dart';
 import '../models/event.dart';
 import 'package:mamieapp/screens/home.dart';
-
+import 'EventDetail.dart';
 
 
 // List of all event that we can see the information
@@ -88,6 +88,8 @@ Widget _myListView(BuildContext context) {
                     //color: Color(0xfff1e8e2),
                       child: InkWell(
                         onTap: () {
+
+                          navigateToSeeEvent(context, (events[index]));
                           //state.selectEvent(events[index]);
                           print("salut2");
                         },
@@ -129,8 +131,12 @@ Widget _myListView(BuildContext context) {
           },
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
+
         )
+
+
     );
+
 
   }
   else {
@@ -148,4 +154,12 @@ Widget _myListView(BuildContext context) {
     return Container();
   };
 
+}
+
+Future navigateToSeeEvent(context,event) async {
+  Navigator.push(context, MaterialPageRoute(
+      builder: (context) => EventDetail(),
+      settings: RouteSettings(
+          arguments: event
+      )));
 }

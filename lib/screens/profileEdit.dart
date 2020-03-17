@@ -445,6 +445,7 @@ class _EditProfilState extends State<EditProfil> {
 
           //put tempUser
           print("send 0");
+          print(tempUser.prenom);
           String userEncoded  = json.encode(tempUser);
           print("send 0,1");
 
