@@ -151,7 +151,7 @@ class HomeState extends State<Home> {
           actions: <Widget>[
             ChangeFamillyButton(userLogged),
             IconButton(
-              icon: const Icon(Icons.chat_bubble),
+              icon: const Icon(Icons.event),
               tooltip: 'Chat',
               onPressed: () {
                 navigateToMessagePage(context);
