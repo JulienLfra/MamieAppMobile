@@ -27,11 +27,11 @@ class _EventDetail extends State<EventDetail> {
       body: Center(
         child: Stack(children: <Widget>[
           Card(
-            child: Row(
+            child: Column(
               children: <Widget>[
-                Expanded(
+                Container(
                   child: CircleAvatar(
-                    radius: 30,
+                    radius: (100),
                     backgroundImage: NetworkImage(event.photo),
                   ),
                 ),
@@ -42,17 +42,20 @@ class _EventDetail extends State<EventDetail> {
                       Center(
                           child: Text(
                         event.nom,
+                              style:TextStyle(height: 2, fontSize: 20),
 
                         //style: TextStyle(color: settings.color1, fontWeight: FontWeight.bold),
                       )),
                       Center(
                           child: Text(
                         event.date,
+                            style:TextStyle(height: 2, fontSize: 20),
                         //style: TextStyle(color: settings.color4),
                       )),
                       Center(
                           child: Text(
                         event.lieu,
+                            style:TextStyle(height: 2, fontSize: 20),
                         //style: TextStyle(color: settings.color4),
                       )),
                     ],

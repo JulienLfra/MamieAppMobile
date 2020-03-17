@@ -29,7 +29,9 @@ class _ListEvenement extends State<ListEvenement> {
       Iterable list = json.decode(response.body);
       events = list.map((model) => Event.fromJson(model)).toList();
     });
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,28 +40,6 @@ class _ListEvenement extends State<ListEvenement> {
   }
 }
 
-/*Widget _myListView(BuildContext context, MyInheritedWidgetState state) {
-  //print(state.family.id);
-  // Todo : Appel ajax puis Affichege list
-
-  return FutureBuilder<Response>(
-
-    future: API.getEventByMail("ap@gmail.com"),
-
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        Iterable list = json.decode(snapshot.data.body);
-        events = list.map((model) => Event.fromJson(model)).toList();
-
-        return buildMenu(context, events, state);
-      } else if (snapshot.hasError) {
-        return Text("${snapshot.error}");
-      }
-      // By default, show a loading spinner.
-      return CircularProgressIndicator();
-    },
-  );
-}*/
 
 Widget _myListView(BuildContext context) {
   // Global settings
@@ -69,6 +49,8 @@ Widget _myListView(BuildContext context) {
         child: ListView.builder(
       itemCount: events.length,
       itemBuilder: (context, index) {
+
+
         return Stack(children: <Widget>[
           Card(
               //color: Color(0xfff1e8e2),
@@ -80,9 +62,9 @@ Widget _myListView(BuildContext context) {
             },
             child: Row(
               children: <Widget>[
-                Expanded(
+                Container(
                   child: CircleAvatar(
-                    radius: 30,
+                    radius: 40,
                     backgroundImage: NetworkImage(events[index].photo),
                   ),
                 ),
@@ -109,9 +91,13 @@ Widget _myListView(BuildContext context) {
           )),
         ]);
       },
+
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-    ));
+    ))
+    ;
+
+
   } else {
     API.getEventByMail("ap@gmail.com").then((response) {
       // Le setState enregistre les variables dont famillies qui ne sera plus vide dans le if
@@ -124,8 +110,9 @@ Widget _myListView(BuildContext context) {
     });
 
     return Container();
+
   }
-  ;
+
 }
 
 Future navigateToSeeEvent(context, event) async {

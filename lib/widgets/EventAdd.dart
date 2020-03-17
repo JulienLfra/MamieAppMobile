@@ -172,7 +172,7 @@ class _EventAdd extends State<EventAdd> {
             children: <Widget>[
               Flexible(
                 //height: 30,
-                child: Text("lieu",
+                child: Text("Lieu   ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
