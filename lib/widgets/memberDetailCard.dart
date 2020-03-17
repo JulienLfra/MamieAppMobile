@@ -30,8 +30,8 @@ class _MembreDetailState extends State<MembreDetail> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 10, 30),
-            height: MediaQuery.of(context).size.height*0.1,
+            margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+//            height: MediaQuery.of(context).size.height*0.15,
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(40.0),

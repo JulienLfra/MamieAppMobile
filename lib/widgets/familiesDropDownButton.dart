@@ -41,6 +41,9 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
         isDense: true,
         style: TextStyle(color: settings.color2),
         onChanged: (Family newValue) {
+          List<User> users = <User>[new User(1, "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", 1, 1, 21)];
+          print("reset");
+          state.setUsers(users);
           // Important
           setState(() {
             // Local state -> Actualise le button
