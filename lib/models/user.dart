@@ -21,9 +21,11 @@ class User {
   String profession;
   String diplome;
   String statut;
+  double latitude;
+  double longitude;
   int age;
 
-  User(this.id, this.nom, this.prenom, this.mail, this.dateDeNaissance, this.ville, this.pays, this.photo, this.profession, this.diplome, this.statut, this.age);
+  User(this.id, this.nom, this.prenom, this.mail, this.dateDeNaissance, this.ville, this.pays, this.photo, this.profession, this.diplome, this.statut, this.latitude, this.longitude, this.age);
   //User();
 
   User.fromJson(Map json)
@@ -38,6 +40,8 @@ class User {
       profession = json['profession'],
       diplome = json['diplome'],
       statut = json['statut'],
+      latitude = json['latitude'],
+      longitude = json['longitude'],
       age = json['age']
   ;
 

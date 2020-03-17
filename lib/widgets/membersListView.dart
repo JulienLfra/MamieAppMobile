@@ -33,16 +33,21 @@ class _ListMembre extends State<ListMembre> {
 List<User> users;
 
 Widget _myListView(BuildContext context, MyInheritedWidgetState state) {
-  print(state.family.id);
-  // Todo : Appel ajax puis Affichege list
-
-
   return FutureBuilder<Response>(
-    future: API.getMembersByFamilyId(state.family.id),
+    future: API.getMembersByFamilyId(state.family.id)..then((value) {
+      // Run the code here using the value
+      Iterable list = json.decode(value.body);
+      users = list.map((model) => User.fromJson(model)).toList();
+      if(state.users.length == 1 && users.length != 0)state.setUsers(users);
+    }),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         Iterable list = json.decode(snapshot.data.body);
         users = list.map((model) => User.fromJson(model)).toList();
+
+
+        // After build send Users to map
+//        WidgetsBinding.instance.addPostFrameCallback((_) => onAfterBuild(context, users));
         //return Container();
         return buildMenu(context, users, state);
       } else if (snapshot.hasError) {
@@ -52,6 +57,11 @@ Widget _myListView(BuildContext context, MyInheritedWidgetState state) {
       return CircularProgressIndicator();
     },
   );
+}
+
+onAfterBuild(context, List<User> users){
+  final MyInheritedWidgetState state = MyInheritedWidget.of(context);
+  if(state.users.length == 1)state.setUsers(users);
 }
 
 Widget buildMenu(BuildContext context, users, MyInheritedWidgetState state) {

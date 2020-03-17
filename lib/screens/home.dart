@@ -51,6 +51,7 @@ class MyInheritedWidgetState extends State<MyInheritedWidget> {
 
   Family family = new Family("0", "InitFamily");
   User user;
+  List<User> users = <User>[new User(1, "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", 1, 1, 21)];
 
   void selectFamily(Family newFamily){
     setState((){
@@ -61,6 +62,13 @@ class MyInheritedWidgetState extends State<MyInheritedWidget> {
   void selectUser(User newUser){
     setState((){
       this.user = newUser;
+    });
+  }
+
+  void setUsers(List<User> reference){
+    setState((){
+      users.clear();
+      users = reference;
     });
   }
 
@@ -137,7 +145,6 @@ class HomeState extends State<Home> {
             icon: const Icon(Icons.settings_applications),
             tooltip: 'Settings',
             onPressed: () {
-              print("salut");
               navigateToSettingPage(context);
             },
           ),
@@ -147,7 +154,6 @@ class HomeState extends State<Home> {
               icon: const Icon(Icons.chat_bubble),
               tooltip: 'Chat',
               onPressed: () {
-                print("salut1");
                 navigateToMessagePage(context);
               },
             )
@@ -157,7 +163,7 @@ class HomeState extends State<Home> {
             children: <Widget>[
               // Test widget for new features
               //MyApp(),
-              MyGoogleMap(),
+              MyGoogleMap(context),
               ListMembre(),
               MembreDetail(),
             ]
