@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:mamieapp/models/event.dart';
+import 'package:mamieapp/models/user.dart';
 
 const baseUrl = "";
 
@@ -67,6 +69,24 @@ class API {
     });
   }
 
+  static setUserLocation(User user, Position coord) async {
+    // set up PUT request arguments
+    String url = 'http://35.180.228.4:5000/changerPositionPersonne?mail='+user.mail+'&latitude='+coord.latitude.toString()+'&longitude='+coord.longitude.toString();
+    Map<String, String> headers = {"Content-type": "application/json"};
+    String json = '{}';
+    // make PUT request
+    http.Response response = await http.put(url, headers: headers);
+    // check the status code for the result
+    int statusCode = response.statusCode;
+    // this API passes back the updated item with the id added
+    String body = response.body;
+    // {
+    //   "title": "Hello",
+    //   "body": "body text",
+    //   "userId": 1,
+    //   "id": 1
+    // }
+  }
 
 
   Future setEvent( String body) async {

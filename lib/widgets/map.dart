@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mamieapp/api/api.dart';
 import 'package:mamieapp/models/user.dart';
 import 'package:mamieapp/resources/globalSettings.dart';
 
@@ -33,8 +34,11 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
     super.initState();
   }
 
-  Future<Position> getPosition() async {
+  Future<Position> getPosition(context) async {
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    final MyInheritedWidgetState state = MyInheritedWidget.of(context);
+    API.setUserLocation(state.user, position);
 
     var markerIdVal = "1";
     final MarkerId markerId = MarkerId(markerIdVal);
@@ -66,7 +70,7 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
       body: Stack(
         children: <Widget>[
           FutureBuilder<Position>(
-            future: getPosition(),
+            future: getPosition(context),
             builder: (context, snapshot){
               if (snapshot.hasData) {
                 return GoogleMap(
