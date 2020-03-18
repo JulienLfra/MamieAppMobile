@@ -89,31 +89,10 @@ class API {
   }
 
 
-  Future setEvent( String body) async {
-
-    print("idTest");
-    /*print(body.id);
-    print("nom");
-    print(body.nom);
-    print("date");
-    print(body.date);
-    print("lieu");
-    print(body.lieu);
-    print("photo");
-    print(body.photo);
-    print("famille");
-    print(body.famille);*/
-    print(body);
-
-    return http.post("http://35.180.228.4:5000/evenement", body: body).then((http.Response response) {
-
-      final int statusCode = response.statusCode;
-
-      if (statusCode < 200 || statusCode > 400 || json == null) {
-        throw new Exception("Error while fetching data");
-      }
-      //return User2.fromJson(json.decode(response.body));
-    });
+  Future setEvent( Event event) async {
+    String body = jsonEncode(event);
+    Map<String, String> headers = {"Content-type": "application/json"};
+    http.post("http://35.180.228.4:5000/evenement", headers: headers, body: body);
   }
 //  static Future setUserByMail(String mail) async {
 //    var url = baseUrl + "http://35.180.28.149:5000/personneMail?mail="+mail;

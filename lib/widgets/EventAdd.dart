@@ -259,7 +259,7 @@ class _EventAdd extends State<EventAdd> {
           print(tempEvent.famille);
           String tempEncoded = json.encode(tempEvent);
 
-          API().setEvent(tempEncoded);
+          API().setEvent(tempEvent);
           //tabUser = list.map((model) => User2.fromJson(model)).toList();
         },
         tooltip: 'Show me the  value!',
