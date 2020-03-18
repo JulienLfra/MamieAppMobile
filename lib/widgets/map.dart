@@ -38,7 +38,7 @@ class MyGoogleSampleState extends State<MyGoogleMap> {
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
     final MyInheritedWidgetState state = MyInheritedWidget.of(context);
-    API.setUserLocation(state.user, position);
+    API.setUserLocation(state.userLogged, position);
 
     var markerIdVal = "1";
     final MarkerId markerId = MarkerId(markerIdVal);

@@ -52,6 +52,7 @@ class MyInheritedWidgetState extends State<MyInheritedWidget> {
   Family family = new Family("0", "InitFamily");
   User user;
   List<User> users = <User>[new User(1, "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", "Test", 1, 1, 21)];
+  User userLogged;
 
   void selectFamily(Family newFamily){
     setState((){

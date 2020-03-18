@@ -64,6 +64,9 @@ class _ChangeFamillyButtonState extends State<ChangeFamillyButton> {
         }).toList(),
       );
     } else {
+      state.userLogged = user;
+      print("Usr logged");
+      print(user.mail);
       API.getFamiliesByMail(user.mail).then((response) {
         // Le setState enregistre les variables dont famillies qui ne sera plus vide dans le if
         // Todo Comment le build sait qu'il y a un changement ?
